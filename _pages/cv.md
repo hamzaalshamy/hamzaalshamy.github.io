@@ -6,6 +6,12 @@ nav: true
 nav_order: 2
 ---
 
+<p>
+  <a href="/assets/pdf/Hamza_Alshamy_CV.pdf" target="_blank" rel="noopener">
+    Open the CV PDF in a new tab
+  </a>
+</p>
+
 <div style="height: calc(100vh - 140px);">
   <iframe
     src="/assets/pdf/Hamza_Alshamy_CV.pdf#view=FitH&toolbar=1"
@@ -14,5 +20,3 @@ nav_order: 2
     style="border:0;"
   ></iframe>
 </div>
-
-<p>If the PDF doesn’t load, <a href="/assets/pdf/Hamza_Alshamy_CV.pdf">open it in a new tab</a>.</p>
