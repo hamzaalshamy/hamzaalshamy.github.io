@@ -14,7 +14,7 @@ profile:
 selected_papers: false
 social: false                 # hide the big social tiles at the bottom
 announcements:
-  enabled: false
+  enabled: true
 latest_posts:
   enabled: false
 ---
