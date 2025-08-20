@@ -5,7 +5,7 @@ permalink: /
 nav_order: 1
 
 # Page options
-subtitle: MS Data Science @ NYU · Computational Social Science
+subtitle: "MS Data Science @ NYU | · <abbr title='Computational Social Science'>CSS</abbr> · <abbr title='Machine Learning'>ML</abbr> · Econ"
 profile:
   align: right
   image: prof_pic.jpg         # put your photo at assets/img/prof_pic.jpg
