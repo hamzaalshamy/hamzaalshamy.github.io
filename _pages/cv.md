@@ -14,7 +14,7 @@ nav_order: 2
 
 <div style="height: calc(100vh - 140px);">
   <iframe
-    src="/assets/pdf/Hamza_Alshamy_CV.pdf#zoom=page-fit&toolbar=1"
+    src="/assets/pdf/Hamza_Alshamy_CV.pdf#view=Fit&toolbar=1"
     width="100%"
     height="100%"
     style="border:0;"
