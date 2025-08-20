@@ -45,6 +45,14 @@ repo_trophies:
 # Layout
 # -----------------------------------------------------------------------------
 
+navbar:
+  - title: "About"
+    url: /
+  - title: "CV"
+    url: https://hamzaalshamy.github.io/assets/pdf/Hamza_Alshamy_CV.pdf
+  - title: "Teaching"
+    url: /teaching/
+
 navbar_fixed: true
 footer_fixed: true
 search_enabled: true
