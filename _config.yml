@@ -45,7 +45,7 @@ repo_trophies:
 # Layout
 # -----------------------------------------------------------------------------
 
-navbar:
+navbar:   # This is the navigation bar (header). Only items listed here show up in the header. Pages not listed here won’t appear in the header anymore, even if they have nav: true. They still exist at their URLs; they’re just not in the menu.
   - title: "About"
     url: /
   - title: "CV"
