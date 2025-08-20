@@ -1,8 +1,11 @@
 ---
-layout: redirect
+layout: cv
 title: CV
 permalink: /cv/
 nav: true
 nav_order: 2
-redirect_to: /assets/pdf/Hamza_Alshamy_CV.pdf
+cv_pdf: /assets/pdf/Hamza_Alshamy_CV.pdf
+description:
+toc:
+  sidebar: none
 ---
