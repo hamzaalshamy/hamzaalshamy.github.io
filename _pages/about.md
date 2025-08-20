@@ -9,7 +9,7 @@ subtitle: MS Data Science @ NYU · Computational Social Science
 profile:
   align: right
   image: prof_pic.jpg         # put your photo at assets/img/prof_pic.jpg
-  image_circular: false
+  image_circular: true
 # Turn off these sections on the About page:
 selected_papers: false
 social: false                 # hide the big social tiles at the bottom
