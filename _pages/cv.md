@@ -2,16 +2,26 @@
 layout: page
 title: CV
 permalink: /cv/
-nav: false
+nav: true
 nav_order: 2
 ---
 
-<div style="height: calc(100vh - 140px);">
-  <iframe
-    src="/assets/pdf/Hamza_Alshamy_CV.pdf#view=FitH&toolbar=1"
-    width="100%"
-    height="100%"
-    style="border:0;"
-  ></iframe>
-</div>
-<p>If the PDF doesn’t load, <a href="/assets/pdf/Hamza_Alshamy_CV.pdf">open it in a new tab</a>.</p>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const pdf = '/assets/pdf/Hamza_Alshamy_CV.pdf';
+
+    // Open PDF in a new tab
+    window.open(pdf, '_blank', 'noopener');
+
+    // Return the current tab to where the user came from (if on your site).
+    const ref = document.referrer || '/';
+    try {
+      const sameOrigin = new URL(ref, window.location.origin).origin === window.location.origin;
+      if (sameOrigin) { window.history.back(); } else { window.location.href = '/'; }
+    } catch (_) {
+      window.location.href = '/';
+    }
+  });
+</script>
+
+<p>Opening CV… If nothing happens, <a href="/assets/pdf/Hamza_Alshamy_CV.pdf" target="_blank" rel="noopener">click here</a>.</p>
