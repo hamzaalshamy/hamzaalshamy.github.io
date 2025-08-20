@@ -21,8 +21,8 @@ latest_posts:
 
 I'm an MS student in Data Science at the [Center for Data Science](https://cds.nyu.edu/) at New York University, working at the intersection of **machine learning (ML)** and **computational social science (CSS)**. My interests center on leveraging existing ML methods and developing new algorithms to better understand social dynamics and answer social questions.
 
-I’m a **Visiting Research Assistant** at the University of Cambridge ([Centre for Human-Inspired AI](https://www.chia.cam.ac.uk/)) with [Umang Bhatt](https://umangsbhatt.github.io/), where I’m researching how **AI assistance** affects skill development, incentives, and promotion dynamics for knowledge-workers.
+I’m a **Visiting Research Assistant** at the University of Cambridge ([Centre for Human-Inspired AI](https://www.chia.cam.ac.uk/)), supervised by [Umang Bhatt](https://umangsbhatt.github.io/), where I’m researching how **AI assistance** affects skill development, incentives, and promotion dynamics for knowledge-workers.
 
-At NYU’s [Center for Conflict and Cooperation](https://www.centerconflictcooperation.com/) (with [Jay Van Bavel](https://www.jayvanbavel.com/) and [Laura Globig](https://scholar.google.com/citations?user=LcdcXxUAAAAJ&hl=en)), I study topics such as polarization, misinformation, and social media & morality.
+At NYU’s [Center for Conflict and Cooperation](https://www.centerconflictcooperation.com/) (supervised by [Jay Van Bavel](https://www.jayvanbavel.com/) and [Laura Globig](https://scholar.google.com/citations?user=LcdcXxUAAAAJ&hl=en)), I study topics such as polarization, misinformation, and social media & morality.
 
 If you’re interested in collaborating on computational social science, NLP-driven analysis, or applied economics, feel free to reach out!
