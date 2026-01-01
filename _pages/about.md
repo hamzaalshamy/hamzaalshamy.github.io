@@ -5,7 +5,12 @@ permalink: /
 nav_order: 1
 
 # Page options
-subtitle: "MS Data Science @ NYU | • Computational Social Science • ML • Economics"
+subtitle: >
+  MS Data Science @ NYU<br>
+  <span style="font-size: 0.9em; opacity: 0.85;">
+  Human–AI Interaction · Computational Social Science · ML/NLP · Economics
+  </span>
+
 profile:
   align: right
   image: prof_pic.jpg         # put your photo at assets/img/prof_pic.jpg
