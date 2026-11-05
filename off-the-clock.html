@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hamza Alshamy, off the clock: music, cooking, and hiking.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23f3f3f1'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Off the Clock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: same system as the homepage. A short intro, then three stacked sections, each with its icon and title on the left and its content on the right. */
+:root {
+  --bg: #151412;
+  --panel: #1f1d1a;
+  --line: #302d29;
+  --ink: #f3f3f1;
+  --text: #c6c2bb;
+  --muted: #8c877f;
+  --accent: #bcb2ff;
+  --font: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --ease: cubic-bezier(.22,.8,.24,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background-color: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(188,178,255,0.35); text-underline-offset: 3px; transition: text-decoration-color .25s; }
+a:hover { text-decoration-color: var(--accent); }
+a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 1120px; margin: 0 auto; }
+h1, h2, h3 { color: var(--ink); font-weight: 500; margin: 0; text-wrap: balance; }
+
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(21,20,18,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+nav.top .col { display: flex; align-items: center; gap: 24px; height: 60px; }
+nav.top .me { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; margin-right: auto; white-space: nowrap; }
+nav.top .links { display: flex; gap: 24px; font-size: 15px; }
+nav.top .links a { color: var(--muted); text-decoration: none; }
+nav.top .links a:hover, nav.top .links a.on { color: var(--ink); }
+@media (max-width: 760px) { nav.top .links { display: none; } }
+
+.intro { padding-block: clamp(32px, 4vw, 52px) clamp(20px, 2.5vw, 28px); }
+.intro h1 { font-size: clamp(36px, 4.6vw, 56px); letter-spacing: -0.02em; line-height: 1.05; }
+.intro .intro-line { margin: 0; font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.4vw, 28px); color: var(--text); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+section.part { border-top: 1px solid var(--line); padding-block: clamp(32px, 4vw, 52px); scroll-margin-top: calc(60px + env(safe-area-inset-top, 0px)); }
+.part .col { display: grid; gap: 20px; }
+.side { display: flex; align-items: center; gap: 16px; }
+.side svg { width: 52px; height: 52px; color: var(--ink); display: block; flex: none; }
+.side h2 { font-size: clamp(28px, 3.2vw, 38px); letter-spacing: -0.02em; line-height: 1.05; }
+.spin { transform-origin: 60px 60px; animation: spin 3.6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+.body { display: grid; gap: 22px; min-width: 0; }
+.body > p { margin: 0; }
+.sub { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+
+/* Hiking: prints scattered on the table */
+.prints { position: relative; aspect-ratio: 1120 / 660; max-width: 100%; margin-top: 4px; }
+.print { position: absolute; left: var(--x); top: var(--y); width: var(--w); padding: 0; border: 0; background: none; cursor: zoom-in; rotate: var(--r); transition: rotate .5s var(--ease), scale .5s var(--ease), box-shadow .5s var(--ease); border-radius: 6px; box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06); }
+.print img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.print:hover, .print:focus-visible { rotate: 0deg; scale: 1.05; z-index: 5; box-shadow: 0 22px 44px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1); }
+.print:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+@media (max-width: 760px) {
+  .prints { aspect-ratio: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .print { position: static; width: auto; }
+  .print.land { grid-column: span 2; }
+  .print:nth-child(odd) { rotate: -1.2deg; } .print:nth-child(even) { rotate: 1.2deg; }
+}
+.lightbox { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: rgba(10,10,12,0.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); cursor: zoom-out; opacity: 0; transition: opacity .35s var(--ease); }
+.lightbox.open { opacity: 1; }
+.lightbox img { display: block; max-width: none; max-height: none; object-fit: contain; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+@media (prefers-reduced-motion: reduce) { .print, .lightbox { transition: none; } }
+
+/* Record wall */
+.rec { display: grid; grid-template-rows: auto auto; align-content: start; gap: 12px; min-width: 0; }
+.hang { position: relative; width: 100%; aspect-ratio: 1; max-width: 100%; align-self: start; }
+.hang::after { content: ""; position: absolute; left: -10px; right: -34px; bottom: -7px; height: 3px; border-radius: 2px; background: var(--line); }
+.disc { position: absolute; inset: 3%; border-radius: 50%; transform: translateX(22%); transition: transform .9s cubic-bezier(.25,.8,.25,1);
+  background: radial-gradient(circle, var(--lab) 0 15%, #0b0b0d 15.5% 17%, transparent 17.5%),
+              repeating-radial-gradient(circle, #121214 0 1.2px, #1c1c20 1.4px 2.6px), #111; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+.disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 30deg, transparent 0 20%, rgba(255,255,255,0.07) 25%, transparent 30% 70%, rgba(255,255,255,0.05) 75%, transparent 80%); }
+.disc i { position: absolute; left: 50%; top: 50%; width: 3%; height: 3%; margin: -1.5% 0 0 -1.5%; border-radius: 50%; background: var(--bg); }
+.sleeve { position: absolute; inset: 0; border-radius: 4px; background: var(--sleeve) center / cover no-repeat; box-shadow: 0 10px 24px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.06); display: grid; align-content: space-between; padding: 12%; transition: transform .8s var(--ease); }
+.sleeve .st { font-size: 14.5px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; color: var(--ink); }
+.sleeve .sa { font-size: 12px; color: var(--muted); }
+.sleeve.has-cover .st, .sleeve.has-cover .sa { display: none; }
+.disc::after { animation: turn 2.4s linear infinite; animation-play-state: paused; }
+.rec:hover .disc, .rec:focus-within .disc { transform: translateX(46%); }
+.rec:hover .disc::after, .rec:focus-within .disc::after { animation-play-state: running; }
+@keyframes turn { from { rotate: 0deg; } to { rotate: 360deg; } }
+.rec:hover .sleeve { transform: translateY(-3px); }
+.rec:focus-visible { outline: 1px solid var(--ink); outline-offset: 6px; border-radius: 6px; }
+.cap { display: none; gap: 1px; padding-top: 4px; }
+.rec.covered .cap { display: grid; }
+.cap b { font-weight: 500; font-size: 14px; color: var(--ink); }
+.cap span { font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .disc, .sleeve { transition: none; } .disc::after { animation: none; } }
+
+.rec { text-decoration: none; color: inherit; }
+.rec.playable { cursor: pointer; }
+.play { font-size: 12.5px; color: var(--muted); display: flex; gap: 6px; align-items: center; opacity: 0; transform: translateY(-2px); transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.play span { color: var(--accent); font-size: 10px; }
+.rec.playable:hover .play, .rec.playable:focus-visible .play { opacity: 1; transform: none; }
+@media (hover: none) { .play { opacity: 1; transform: none; } }
+
+/* Music layout: wall on the left, rig on the right */
+.music-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px 40px; align-items: start; }
+.music-left { display: grid; gap: 34px; min-width: 0; }
+.wall-wrap, .rig { display: flex; flex-direction: column; }
+
+@media (max-width: 860px) { .music-grid { grid-template-columns: 1fr; } }
+.wall-wrap, .rig { min-width: 0; }
+.wall { --gap: 44px; --cols: 3.45; display: grid; grid-auto-flow: column; grid-template-rows: auto; align-items: start; grid-auto-columns: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); gap: 28px var(--gap); padding: 26px 44px 10px 0; margin-top: -20px; border-radius: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 0px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.wall .rec { scroll-snap-align: start; }
+@media (max-width: 480px) { .wall { --cols: 2.45; --gap: 36px; padding: 26px 36px 10px 0; scroll-padding-inline: 0px; } }
+.wall::-webkit-scrollbar { height: 6px; }
+.wall::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.wall:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+.wall-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.wall-head .label { margin: 0; }
+.wall { cursor: grab; }
+.wall.dragging { cursor: grabbing; user-select: none; }
+.wall.dragging .rec { pointer-events: none; }
+.wall-track { position: relative; height: 2px; margin: 4px 44px 0 0; background: var(--line); border-radius: 2px; overflow: hidden; }
+.wall-track i { position: absolute; top: 0; bottom: 0; left: 0; width: 30%; background: var(--text); border-radius: 2px; transition: left .12s linear; }
+.wall { scrollbar-width: none !important; }
+.wall::-webkit-scrollbar { display: none; }
+
+/* Rig drawing */
+.board { flex: 1; background: #1f1d1a; border-radius: 20px; padding: 16px 14px 8px; display: grid; align-content: center; overflow-x: auto; }
+.board svg { width: 100%; min-width: 420px; height: auto; display: block; }
+
+.rig-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.rig-head .label { margin: 0; }
+.play-btn { display: inline-flex; align-items: center; gap: 8px; font: 500 14px var(--font); color: var(--bg); background: var(--ink); border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; transition: background .25s var(--ease); }
+.play-btn[aria-pressed="true"] { background: var(--accent); }
+.play-btn .ico { font-size: 11px; }
+.play-btn:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+.board { position: relative; }
+.board-hint { margin: 4px 6px 4px; font-size: 13px; color: var(--muted); }
+.rig-note { margin: 0; font-size: 15.5px; color: var(--text); }
+#board .pedal { cursor: pointer; outline: none; }
+#board .pedal:hover rect.body, #board .pedal:focus-visible rect.body { stroke: var(--accent); }
+
+/* Edge bounce for the record wall */
+.wall .rec { translate: var(--bounce, 0px) 0; transition: translate .55s cubic-bezier(.34, 1.56, .64, 1); }
+.wall.pulling .rec { transition: none; }
+@media (prefers-reduced-motion: reduce) { .wall .rec { translate: none; } }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 56px; }
+footer .col { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 15px; color: var(--muted); }
+/* Type: Fraunces for headings and labels, Instrument Sans for reading. */
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; font-optical-sizing: auto; }
+nav.top .me { font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; }
+.label { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: -0.005em; color: var(--ink); margin: 0 0 12px; }
+/* Social links. Icons: Font Awesome Free (CC BY 4.0, fontawesome.com/license/free); Google Scholar from Academicons (SIL OFL 1.1) */
+.socials { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.socials a { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--text); text-decoration: none; transition: color .25s var(--ease), background .25s var(--ease); }
+.socials a:hover { color: var(--ink); background: var(--panel); }
+.socials svg { width: 19px; height: 19px; fill: currentColor; display: block; }
+.nav-socials { gap: 0; padding-left: 14px; border-left: 1px solid var(--line); }
+.nav-socials a { width: 32px; height: 32px; }
+.nav-socials svg { width: 16px; height: 16px; }
+@media (max-width: 560px) { .nav-socials { display: none; } }
+.socials .cv-link { width: auto; height: 38px; padding: 0 14px; margin-left: 6px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--ink); }
+.socials .cv-link:hover { border-color: var(--text); }
+.pill { font-size: 14px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; white-space: nowrap; }
+.pill:hover { border-color: var(--muted); }
+</style>
+</head>
+<body>
+<nav class="top gutter" aria-label="Main">
+  <div class="col">
+    <a class="me" href="index.html">Hamza Alshamy</a>
+    <div class="links">
+      <a href="index.html">About</a>
+      <a href="teaching.html">Teaching</a>
+      <a class="on" aria-current="page" href="#top">Off the clock</a>
+    </div>
+    <div class="socials nav-socials" aria-label="Elsewhere"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+    <a class="pill" href="assets/pdf/Hamza_Alshamy_CV.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+
+<header class="intro gutter" id="top">
+  <div class="col">
+    <h1 class="sr">Off the clock</h1>
+    <p class="intro-line">Aside from research, a little about my leisure.</p>
+  </div>
+</header>
+
+<section class="part gutter" id="music">
+  <div class="col">
+    <div class="side">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <g class="spin">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width="0.6" opacity=".5"/>
+          <circle cx="60" cy="60" r="37" fill="none" stroke="currentColor" stroke-width="0.6" opacity=".5"/>
+          <circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="0.6" opacity=".5"/>
+          <circle cx="60" cy="60" r="17" fill="var(--accent)"/>
+          <circle cx="60" cy="60" r="2.4" fill="var(--bg)"/>
+          <path d="M60 14 A46 46 0 0 1 98 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".9"/>
+        </g>
+      </svg>
+      <h2>Music</h2>
+    </div>
+    <div class="body">
+      <p>Music is a big part of my daily life. I've been playing guitar for over ten years, mostly neo-soul, jazz, and blues. I build layered progressions with a looper and a few pedals. <a href="https://www.youtube.com/watch?v=GxdAqDC9sHw" target="_blank" rel="noopener">This</a> was my introduction to looping.</p>
+      <div class="music-grid">
+        <div class="music-left">
+        <div class="wall-wrap">
+          <div class="wall-head">
+            <p class="label">On the wall right now</p>
+          </div>
+          <div class="wall" id="wall" tabindex="0" aria-label="Records on the wall"></div>
+          <div class="wall-track" aria-hidden="true"><i id="wall-thumb"></i></div>
+        </div>
+        <div class="rig-info">
+          <div class="rig-head">
+            <p class="label">Current rig</p>
+            <button class="play-btn" id="play" type="button" aria-pressed="false"><span class="ico" aria-hidden="true">▶</span><span class="lbl">Play a riff</span></button>
+          </div>
+          <p class="rig-note">My guitar runs through a few effect pedals and a loop pedal. These are the ones I'm using right now, not always in this order.</p>
+        </div>
+        </div>
+        <div class="rig">
+          <div class="board">
+            <svg id="board" viewBox="0 0 560 372" role="img" aria-label="My rig, in signal order: Fender Player Stratocaster HSS Plus Top guitar, Donner DT-1 tuner, Dunlop Cry Baby GCB95 wah, Boss DS-2 Turbo Distortion, Boss RV-6 reverb, Boss RC-30 Loop Station, into the amp."></svg>
+            <p class="board-hint">Press play, then click a pedal to switch it, drag the wah, or tap the looper to record two bars and play over them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="part gutter" id="hiking">
+  <div class="col">
+    <div class="side">
+      <svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 96 L44 40 L62 66 L76 48 L112 96 Z"/>
+        <path d="M36 52 l8 -12 l8 12"/>
+        <circle cx="88" cy="26" r="8"/>
+        <path d="M24 96 v-10 M20 90 l4 -8 l4 8 M98 96 v-8 M95 91 l3 -6 l3 6"/>
+      </svg>
+      <h2>Hiking</h2>
+    </div>
+    <div class="body">
+      <p>When I can get out of the city, I go hiking. A few photos from the trail.</p>
+      <div class="prints" id="prints"></div>
+    </div>
+  </div>
+</section>
+
+<section class="part gutter" id="cooking">
+  <div class="col">
+    <div class="side">
+      <svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M40 18 v26 M33 18 v20 a7 7 0 0 0 14 0 v-20 M40 52 v50"/>
+        <path d="M80 18 c-9 6 -11 26 -10 40 h10 V18 Z M80 58 v44"/>
+      </svg>
+      <h2>Cooking</h2>
+    </div>
+    <div class="body">
+      <p>I enjoy cooking quite a bit, and I tend to think about the different dimensions that make up a good dish. Consider the case of sandwiches: in addition to flavor and texture, a dimension that is sometimes overlooked is their structural integrity and the uniformity of bites.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="gutter">
+  <div class="col">
+    <span>Hamza Alshamy · New York</span>
+    <div class="socials"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+  </div>
+</footer>
+
+<script>
+// Record wall: the records you've picked, in order.
+// Each needs t (title) and a (artist). Optional: cover (an image path, e.g. 'assets/covers/oddisee.jpg'),
+// song (a link that opens when the record is clicked) and songTitle (shown on hover).
+const RECORDS = [
+  { t: 'The Good Fight', a: 'Oddisee', cover: 'assets/covers/oddisee-the-good-fight.jpg' },
+  { t: 'Beat Tape 2', a: 'Tom Misch', cover: 'assets/covers/tom-misch-beat-tape-2.jpg' },
+  { t: 'Live at Joshua Tree', a: 'Yussef Dayes', cover: 'assets/covers/yussef-dayes-joshua-tree.jpg' },
+  { t: 'Live at the Piano', a: 'Cory Henry', cover: 'assets/covers/cory-henry-live-at-the-piano.jpg' },
+  { t: 'The Universe Smiles Upon You', a: 'Khruangbin', cover: 'assets/covers/khruangbin-universe-smiles.jpg' },
+  { t: 'Mona Lisa', a: 'Apollo Brown & Joell Ortiz', cover: 'assets/covers/apollo-brown-joell-ortiz-mona-lisa.jpg' },
+  { t: 'Never Too Much', a: 'Luther Vandross', cover: 'assets/covers/luther-vandross-never-too-much.jpg' }
+];
+const LABELS = ['#bcb2ff', '#e08b62', '#8fa3c9', '#c96d5b', '#9fb59a', '#d8a65e', '#b38a6c', '#a9c3cf'];
+const SLEEVES = ['#2b2a31', '#2e2c2a', '#28292d', '#2d2a2c', '#2a2c2b', '#2c2a29', '#29282b', '#2a2b2e'];
+const esc = v => String(v || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const wall = document.getElementById('wall');
+
+function render(records) {
+  wall.innerHTML = records.map((r, i) => {
+    const lab = LABELS[i % LABELS.length], sleeve = SLEEVES[i % SLEEVES.length];
+    const tag = r.song ? 'a' : 'div', link = r.song ? ` href="${esc(r.song)}" target="_blank" rel="noopener" aria-label="Play ${esc(r.songTitle || r.t)} by ${esc(r.a)}"` : ' tabindex="0"';
+    return `<${tag} class="rec${r.song ? ' playable' : ''}"${link}>
+  <div class="hang" style="--lab:${lab};--sleeve:${sleeve}">
+    <div class="disc"><i></i></div>
+    <div class="sleeve" id="sl${i}"><span class="st">${esc(r.t)}</span><span class="sa">${esc(r.a)}</span></div>
+  </div>
+  <div class="cap"><b>${esc(r.t)}</b><span>${esc(r.a)}</span></div>
+  ${r.song ? `<div class="play"><span aria-hidden="true">▶</span> ${esc(r.songTitle || 'Play')}</div>` : ''}
+</${tag}>`;
+  }).join('');
+  records.forEach((r, i) => {
+    if (!r.cover) return;
+    const img = new Image();
+    img.onload = () => { const el = document.getElementById('sl' + i); if (!el) return; el.style.background = `url('${r.cover.replace(/'/g, '%27')}') center / cover no-repeat`; el.classList.add('has-cover'); el.closest('.rec').classList.add('covered'); };
+    img.src = r.cover;
+  });
+}
+
+render(RECORDS);
+// The wall scrolls sideways: a slim track shows where you are, you can drag it, and it nudges once when it comes into view.
+(() => {
+  const thumb = document.getElementById('wall-thumb'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sync = () => {
+    const vis = wall.clientWidth / wall.scrollWidth, max = wall.scrollWidth - wall.clientWidth;
+    thumb.style.width = (vis * 100) + '%';
+    thumb.style.left = (max > 0 ? (wall.scrollLeft / max) * (1 - vis) * 100 : 0) + '%';
+  };
+  wall.addEventListener('scroll', sync, { passive: true }); addEventListener('resize', sync); sync();
+  // drag to scroll with a mouse
+  let drag = null;
+  wall.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; drag = { x: e.clientX, left: wall.scrollLeft, moved: false }; });
+  addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) > 4) { drag.moved = true; wall.classList.add('dragging'); wall.style.scrollSnapType = 'none'; }
+    if (drag.moved) wall.scrollLeft = drag.left - dx;
+  });
+  addEventListener('pointerup', () => { if (!drag) return; wall.classList.remove('dragging'); wall.style.scrollSnapType = ''; drag = null; });
+  // a small nudge the first time the wall is on screen
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      if (!es.some(x => x.isIntersecting)) return; io.disconnect();
+      setTimeout(() => { wall.style.setProperty('--bounce', '-42px'); setTimeout(() => wall.style.setProperty('--bounce', '0px'), 420); }, 500);
+    }, { threshold: 0.6 });
+    io.observe(wall);
+  }
+})();
+
+// A little bounce when you scroll past either end of the wall.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const MAX = 46, RESIST = 0.32;
+  let pull = 0, idle = null, touchX = null;
+  const atStart = () => wall.scrollLeft <= 0;
+  const atEnd = () => wall.scrollLeft + wall.clientWidth >= wall.scrollWidth - 1;
+  const set = v => { pull = Math.max(-MAX, Math.min(MAX, v)); wall.style.setProperty('--bounce', (pull * RESIST * 2.2).toFixed(1) + 'px'); };
+  const release = () => { wall.classList.remove('pulling'); pull = 0; wall.style.setProperty('--bounce', '0px'); };
+  wall.addEventListener('wheel', e => {
+    const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+    if (!dx) return;
+    const pastStart = dx < 0 && atStart(), pastEnd = dx > 0 && atEnd();
+    if (!pastStart && !pastEnd) { if (pull) release(); return; }
+    e.preventDefault();
+    wall.classList.add('pulling');
+    set(pull - dx * RESIST);
+    clearTimeout(idle); idle = setTimeout(release, 110);
+  }, { passive: false });
+  wall.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  wall.addEventListener('touchmove', e => {
+    if (touchX === null) return;
+    const dx = e.touches[0].clientX - touchX;
+    if ((dx > 0 && atStart()) || (dx < 0 && atEnd())) { wall.classList.add('pulling'); set(dx * 0.9); }
+  }, { passive: true });
+  const end = () => { touchX = null; if (pull) release(); };
+  wall.addEventListener('touchend', end); wall.addEventListener('touchcancel', end);
+})();
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
+  e.preventDefault();
+  scrollTo({ top: t.getBoundingClientRect().top + scrollY - 60, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+
+// Rig: the signal chain, drawn. A pulse runs from the guitar through each pedal to the amp.
+(() => {
+  const svg = document.getElementById('board'); if (!svg) return;
+  const NS = 'http://www.w3.org/2000/svg', INK = '#f3f3f1', MUTED = '#8c877f', LINE = '#3a3631', PANEL = '#1f1d1a', ACC = '#bcb2ff';
+  const F = getComputedStyle(document.body).fontFamily;
+  const el = (t, a, p = svg, txt) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; };
+  const text = (x, y, s, size, col, anchor = 'start', w = 400) => el('text', { x, y, fill: col, 'font-size': size, 'font-weight': w, 'text-anchor': anchor, 'font-family': F }, svg, s);
+  const Y = 264;
+  // cable (drawn first, pedals cover it)
+  const cable = el('path', { d: `M64,168 C64,222 4,214 6,${Y} L540,${Y}`, stroke: LINE, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' });
+  // guitar: solid body with a waist, two forward horns and deep cutaways; six tuners in a line on the headstock
+  const g = el('g', {});
+  const S = 1.5; // stroke
+  el('path', { d: 'M196,101 C206,97 216,86 226,74 C232,67 240,63 238,57 C236,52 228,52 220,55 C204,62 188,66 166,62 C140,58 122,40 90,36 C46,30 14,58 14,108 C14,160 46,186 92,184 C126,182 140,166 164,162 C182,159 196,162 210,163 C220,164 227,161 224,155 C218,144 204,126 196,117 Z', fill: PANEL, stroke: INK, 'stroke-width': S, 'stroke-linejoin': 'round' }, g);
+  el('path', { d: 'M192,101 C180,78 156,70 130,72 C104,74 82,82 70,98 C58,114 62,138 80,150 C96,160 124,162 144,152 C162,143 180,132 192,117', fill: 'none', stroke: MUTED, 'stroke-width': 1 }, g); // pickguard
+  // neck and frets
+  el('rect', { x: 196, y: 102, width: 252, height: 14, rx: 1.5, fill: PANEL, stroke: INK, 'stroke-width': 1.4 }, g);
+  const NUT = 448, BRIDGE = 80, SC = NUT - BRIDGE, fret = n => NUT - SC * (1 - Math.pow(2, -n / 12));
+  for (let n = 1; n <= 21; n++) { const x = fret(n); if (x > 198) el('line', { x1: x, y1: 102, x2: x, y2: 116, stroke: MUTED, 'stroke-width': 0.9 }, g); }
+  [3, 5, 7, 9, 15, 17, 19].forEach(n => el('circle', { cx: (fret(n) + fret(n - 1)) / 2, cy: 109, r: 1.5, fill: MUTED }, g));
+  [106, 112].forEach(cy => el('circle', { cx: (fret(12) + fret(11)) / 2, cy, r: 1.5, fill: MUTED }, g));
+  // headstock with tuners along its top edge
+  el('path', { d: 'M448,102 C456,99 462,93 472,90 L522,84 C530,83 534,88 532,94 C530,100 520,104 508,106 L470,114 C462,116 455,116 448,116 Z', fill: PANEL, stroke: INK, 'stroke-width': 1.4, 'stroke-linejoin': 'round' }, g);
+  const posts = [474, 483, 492, 501, 510, 519].map(x => [x, 90 - (x - 472) * 0.12]);
+  posts.forEach(([x, e]) => { el('rect', { x: x - 3, y: e - 8, width: 6, height: 5, rx: 2, fill: 'none', stroke: INK, 'stroke-width': 1.1 }, g); el('circle', { cx: x, cy: e + 4.5, r: 2.1, fill: INK }, g); });
+  // pickups (bridge humbucker, two single coils), bridge, controls, jack
+  el('rect', { x: BRIDGE - 4, y: 94, width: 9, height: 30, rx: 1.5, fill: INK }, g);
+  el('rect', { x: 106, y: 94, width: 15, height: 30, rx: 2, fill: 'none', stroke: INK, 'stroke-width': 1.3 }, g);
+  el('line', { x1: 113.5, y1: 96, x2: 113.5, y2: 122, stroke: MUTED, 'stroke-width': 0.9 }, g);
+  [138, 162].forEach(x => el('rect', { x, y: 95, width: 7, height: 28, rx: 3.5, fill: 'none', stroke: INK, 'stroke-width': 1.3 }, g));
+  for (let k = 0; k < 6; k++) {
+    const y = 104 + k * 2, [px, pe] = posts[k];
+    el('line', { x1: BRIDGE, y1: y, x2: NUT, y2: y, stroke: INK, 'stroke-width': 0.55, opacity: 0.55 }, g);
+    el('line', { x1: NUT, y1: y, x2: px, y2: pe + 4.5, stroke: INK, 'stroke-width': 0.55, opacity: 0.45 }, g);
+  }
+  [[124, 146], [144, 150], [164, 144]].forEach(([x, y]) => el('circle', { cx: x, cy: y, r: 4, fill: 'none', stroke: INK, 'stroke-width': 1.2 }, g));
+  el('line', { x1: 150, y1: 136, x2: 160, y2: 131, stroke: INK, 'stroke-width': 1.6, 'stroke-linecap': 'round' }, g);
+  el('ellipse', { cx: 64, cy: 164, rx: 4.5, ry: 3.2, fill: INK }, g);
+  text(252, 150, 'Fender Player Stratocaster HSS', 15, INK, 'start', 500);
+  // pedals
+  const lamps = [];
+  const pedal = (x, w, type, name, draw) => {
+    const p = el('g', { class: 'pedal', role: 'button', tabindex: 0, 'aria-label': `${type}: ${name}` });
+    el('rect', { class: 'body', x, y: 226, width: w, height: 76, rx: 9, fill: PANEL, stroke: INK, 'stroke-width': 1.4 }, p);
+    const lamp = draw(p, x, w);
+    lamps.push({ x0: x, x1: x + w, lamp, g: p, key: type.toLowerCase() });
+    text(x + w / 2, 328, type, 13, MUTED, 'middle');
+    text(x + w / 2, 349, name, 15, INK, 'middle', 500);
+  };
+  const led = (p, cx, cy) => el('circle', { cx, cy, r: 3, fill: LINE }, p);
+  const knob = (p, cx, cy, r = 5.5) => { el('circle', { cx, cy, r, fill: 'none', stroke: INK, 'stroke-width': 1.2 }, p); el('line', { x1: cx, y1: cy, x2: cx, y2: cy - r + 1.5, stroke: INK, 'stroke-width': 1.2 }, p); };
+  const sw = (p, cx, cy) => { el('circle', { cx, cy, r: 7.5, fill: 'none', stroke: INK, 'stroke-width': 1.3 }, p); el('circle', { cx, cy, r: 3.5, fill: INK }, p); };
+  pedal(14, 60, 'Tuner', 'DT-1', (p, x) => { el('rect', { x: x + 10, y: 238, width: 40, height: 20, rx: 3, fill: 'none', stroke: INK, 'stroke-width': 1.2 }, p); el('line', { x1: x + 30, y1: 242, x2: x + 30, y2: 254, stroke: MUTED, 'stroke-width': 1 }, p); sw(p, x + 30, 284); return led(p, x + 52, 266); });
+  const WAH = { x: 88, ridges: [], treadle: null };
+  pedal(88, 68, 'Wah', 'Cry Baby', (p, x) => { WAH.treadle = el('path', { fill: 'none', stroke: INK, 'stroke-width': 1.3 }, p); for (let k = 0; k < 7; k++) WAH.ridges.push(el('line', { stroke: MUTED, 'stroke-width': 1 }, p)); return WAH.treadle; });
+  // pos 0 = heel down (dark, bassy), 1 = toe down (bright). The treadle tilts in perspective.
+  function drawWah(pos) {
+    const x = WAH.x, top = 4 + 9 * pos, bot = 4 + 9 * (1 - pos), y0 = 234 + 4 * pos, y1 = 292 - 4 * (1 - pos);
+    WAH.treadle.setAttribute('d', `M${x + 3 + top},${y0} L${x + 65 - top},${y0} L${x + 65 - bot},${y1} L${x + 3 + bot},${y1} Z`);
+    WAH.ridges.forEach((r, k) => {
+      const u = (k + 1) / 8, eu = Math.pow(u, 0.75 + pos * 0.5), y = y0 + (y1 - y0) * eu, ins = top + (bot - top) * eu + 7;
+      r.setAttribute('x1', x + 3 + ins); r.setAttribute('x2', x + 65 - ins); r.setAttribute('y1', y); r.setAttribute('y2', y);
+    });
+  }
+  drawWah(0.5);
+  pedal(170, 60, 'Distortion', 'DS-2', (p, x) => { [x + 12, x + 24, x + 36, x + 48].forEach(cx => knob(p, cx, 242, 4.6)); sw(p, x + 30, 282); return led(p, x + 30, 258); });
+  pedal(244, 60, 'Reverb', 'RV-6', (p, x) => { [x + 12, x + 24, x + 36, x + 48].forEach(cx => knob(p, cx, 242, 4.6)); sw(p, x + 30, 282); return led(p, x + 30, 258); });
+  pedal(318, 100, 'Looper', 'RC-30', (p, x) => { [x + 28, x + 72].forEach(cx => { el('circle', { cx, cy: 248, r: 12, fill: 'none', stroke: INK, 'stroke-width': 1.2 }, p); el('circle', { cx, cy: 248, r: 6, fill: 'none', stroke: MUTED, 'stroke-width': 1 }, p); sw(p, cx, 284); }); return led(p, x + 50, 248); });
+  // amp
+  const a = el('g', {});
+  el('rect', { x: 440, y: 212, width: 106, height: 92, rx: 9, fill: PANEL, stroke: INK, 'stroke-width': 1.4 }, a);
+  el('line', { x1: 440, y1: 232, x2: 546, y2: 232, stroke: INK, 'stroke-width': 1.2 }, a);
+  [456, 470, 484].forEach(cx => el('circle', { cx, cy: 222, r: 3.2, fill: 'none', stroke: INK, 'stroke-width': 1.1 }, a));
+  const ampLamp = el('circle', { cx: 532, cy: 222, r: 3, fill: LINE }, a);
+  el('rect', { x: 452, y: 240, width: 82, height: 54, rx: 4, fill: 'none', stroke: MUTED, 'stroke-width': 1 }, a);
+  for (let k = 1; k < 7; k++) el('line', { x1: 456, y1: 240 + k * 7.7, x2: 530, y2: 240 + k * 7.7, stroke: LINE, 'stroke-width': 1 }, a);
+  lamps.push({ x0: 440, x1: 546, lamp: ampLamp, key: 'amp' });
+  text(493, 328, 'Amp', 13, MUTED, 'middle');
+  // ---- state ----
+  const ON = { tuner: false, wah: false, distortion: false, reverb: true, looper: false, amp: false };
+  const REC = '#e07a6b';
+  let looper = 'off'; // off, armed, rec, play
+  const byKey = Object.fromEntries(lamps.map(o => [o.key, o]));
+  const light = (o, on) => { if (o.lamp.tagName === 'path') o.lamp.setAttribute('stroke', on ? ACC : INK); else o.lamp.setAttribute('fill', on ? ACC : LINE); };
+  const tunerNote = el('text', { x: 44, y: 253, fill: ACC, 'font-size': 11, 'font-weight': 500, 'text-anchor': 'middle', 'font-family': F, opacity: 0 }, byKey.tuner.g, '');
+  const loopStatus = el('text', { x: 368, y: 216, 'font-size': 12.5, 'font-weight': 500, 'text-anchor': 'middle', 'font-family': F }, svg, '');
+  const paint = () => {
+    ON.looper = looper !== 'off';
+    lamps.forEach(o => { light(o, ON[o.key]); if (o.g) o.g.setAttribute('aria-pressed', ON[o.key]); });
+    const lp = byKey.looper.lamp, txt = { off: '', armed: 'Recording next pass', rec: '● Recording', play: 'Looping' }[looper];
+    if (looper === 'armed' || looper === 'rec') lp.setAttribute('fill', REC);
+    loopStatus.textContent = txt; loopStatus.setAttribute('fill', looper === 'play' ? ACC : REC);
+  };
+  paint();
+
+  // ---- sound ----
+  // Source: a generated guitar part (Karplus-Strong plucks). To use a recording instead, set SOURCE_URL.
+  const SOURCE_URL = ''; // e.g. 'assets/audio/clean-riff.mp3': a few seconds of clean guitar, looped
+  const BPM = 86, BEAT = 60 / BPM, LOOP = 8, LEN = LOOP * BEAT; // two bars of 4
+  const N = n => 440 * Math.pow(2, (n - 69) / 12);
+  const NAMES = ['C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
+  // [beat, notes (MIDI), strum]. CHORDS is the part you loop; MELODY is what you play over the loop.
+  const CHORDS = [[0, [53, 57, 60, 64], 1], [1.5, [76], 0], [2, [52, 55, 59, 62], 1], [3.5, [74], 0], [4, [50, 53, 57, 60], 1], [5.5, [72], 0], [6, [48, 52, 55, 59], 1], [7, [71], 0], [7.5, [69], 0]];
+  const MELODY = [[0.5, [76], 0], [1, [72], 0], [1.5, [69], 0], [2.5, [74], 0], [3, [71], 0], [3.5, [67], 0], [4.5, [72], 0], [5, [69], 0], [5.5, [65], 0], [6.5, [64], 0], [7, [67], 0], [7.5, [71], 0]];
+  let ac, live, master, timer, playing = false, nextT = 0, srcNode = null, loopSrc = null, loopBuf = null, loopGain;
+  const sources = new Set(), bufs = {};
+  let wahPos = 0.5, wahHeld = false;
+  const wahFreq = pos => 350 * Math.pow(2400 / 350, pos);
+
+  function pluck(freq) {
+    const k = freq.toFixed(1); if (bufs[k]) return bufs[k];
+    const sr = ac.sampleRate, len = Math.floor(sr * 2.4), b = ac.createBuffer(1, len, sr), d = b.getChannelData(0);
+    const per = Math.max(2, Math.round(sr / freq)), ring = new Float32Array(per);
+    for (let i = 0; i < per; i++) ring[i] = Math.random() * 2 - 1;
+    let idx = 0, last = 0;
+    for (let i = 0; i < len; i++) { const n = (idx + 1) % per, v = ring[idx]; ring[idx] = 0.4975 * (v + ring[n]); last = last * 0.35 + v * 0.65; d[i] = last * 0.5; idx = n; }
+    return bufs[k] = b;
+  }
+  let room = null;
+  function impulse() {
+    if (room) return room;
+    const sr = ac.sampleRate, len = Math.floor(sr * 2.8); room = ac.createBuffer(2, len, sr);
+    for (let c = 0; c < 2; c++) { const d = room.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2); }
+    return room;
+  }
+  // One copy of the pedal chain on a given audio context (live, or offline for recording a loop).
+  function chain(ctx) {
+    const g = () => ctx.createGain();
+    const stage = (input, fxIn, fxOut, output) => { const dry = g(), wet = g(); input.connect(dry).connect(output); input.connect(fxIn); fxOut.connect(wet).connect(output); return { dry, wet }; };
+    const input = g(), tuner = g(), a = g(), b = g(), c = g(), out = g();
+    input.connect(tuner).connect(a);
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 6; bp.frequency.value = wahFreq(0.5);
+    const wahGain = g(); wahGain.gain.value = 2.8; bp.connect(wahGain);
+    const wah = stage(a, bp, wahGain, b);
+    const drive = g(); drive.gain.value = 6;
+    const shaper = ctx.createWaveShaper(), curve = new Float32Array(2048);
+    for (let i = 0; i < 2048; i++) curve[i] = Math.tanh(3 * (i / 1024 - 1));
+    shaper.curve = curve; shaper.oversample = '4x';
+    const tone = ctx.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 3200;
+    const level = g(); level.gain.value = 0.32;
+    drive.connect(shaper).connect(tone).connect(level);
+    const dist = stage(b, drive, level, c);
+    const conv = ctx.createConvolver(); conv.buffer = impulse();
+    const verb = stage(c, conv, conv, out); verb.dry.gain.value = 1;
+    return { input, out, tuner, wah, dist, verb, bp };
+  }
+  function setChain(ch, st, ctx, smooth) {
+    const t = ctx.currentTime, set = (prm, v) => smooth ? prm.setTargetAtTime(v, t, 0.03) : (prm.value = v);
+    set(ch.tuner.gain, st.tuner ? 0 : 1);
+    set(ch.wah.dry.gain, st.wah ? 0 : 1); set(ch.wah.wet.gain, st.wah ? 1 : 0);
+    set(ch.dist.dry.gain, st.distortion ? 0 : 1); set(ch.dist.wet.gain, st.distortion ? 1 : 0);
+    set(ch.verb.wet.gain, st.reverb ? 0.5 : 0);
+  }
+  function note(ctx, midi, t, vel, dest, track) {
+    const s = ctx.createBufferSource(), v = ctx.createGain();
+    s.buffer = pluck(N(midi)); v.gain.value = vel; s.connect(v).connect(dest); s.start(t); s.stop(t + 2.4);
+    if (track) { sources.add(s); s.onended = () => sources.delete(s); }
+  }
+  function playPart(ctx, part, t0, dest, track) {
+    part.forEach(([b, notes, strum]) => notes.forEach((m, k) => note(ctx, m, t0 + b * BEAT + (strum ? k * 0.022 : 0), strum ? 0.55 : 0.75, dest, track)));
+  }
+  function build() {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    live = chain(ac); master = ac.createGain(); loopGain = ac.createGain(); loopGain.gain.value = 0.85;
+    const comp = ac.createDynamicsCompressor();
+    live.out.connect(master); loopGain.connect(master); master.connect(comp).connect(ac.destination);
+    setChain(live, ON, ac, false);
+  }
+  // The looper: renders one pass of the chords through the pedals as they are set right now, then loops it.
+  async function recordLoop(snapshot) {
+    const sr = ac.sampleRate, oc = new OfflineAudioContext(2, Math.ceil(sr * LEN * 2), sr), ch = chain(oc);
+    setChain(ch, snapshot, oc, false); ch.out.connect(oc.destination);
+    if (snapshot.wah) { const n = 256, c = new Float32Array(n); for (let i = 0; i < n; i++) c[i] = wahFreq(0.5 + 0.5 * Math.sin((i / n) * LEN * 2 * Math.PI * 1.6 / 2)); ch.bp.frequency.setValueCurveAtTime(c, 0, LEN * 2); }
+    playPart(oc, CHORDS, 0, ch.input, false); playPart(oc, CHORDS, LEN, ch.input, false);
+    const full = await oc.startRendering(), start = Math.floor(sr * LEN), out = ac.createBuffer(2, Math.floor(sr * LEN), sr);
+    for (let c = 0; c < 2; c++) out.getChannelData(c).set(full.getChannelData(c).subarray(start, start + out.length));
+    return out;
+  }
+  const at = (t, fn) => setTimeout(() => { if (playing) fn(); }, Math.max(0, (t - ac.currentTime) * 1000));
+  function schedule() {
+    while (nextT < ac.currentTime + 0.25) {
+      const t0 = nextT;
+      if (looper === 'armed') {
+        looper = 'rec'; at(t0, paint);
+        recordLoop({ ...ON }).then(b => { loopBuf = b; });
+      } else if (looper === 'rec' && loopBuf) {
+        loopSrc = ac.createBufferSource(); loopSrc.buffer = loopBuf; loopSrc.loop = true; loopSrc.connect(loopGain); loopSrc.start(t0);
+        looper = 'play'; at(t0, paint);
+      }
+      if (!SOURCE_URL) {
+        const part = looper === 'play' ? MELODY : CHORDS;
+        playPart(ac, part, t0, live.input, true);
+        part.forEach(([b, notes]) => at(t0 + b * BEAT, () => showNote(notes[0])));
+      }
+      nextT += LEN;
+    }
+  }
+  function showNote(m) { tunerNote.textContent = NAMES[m % 12]; tunerNote.setAttribute('opacity', 1); }
+  async function start() {
+    if (playing) return;
+    if (!ac) build();
+    if (ac.state === 'suspended') await ac.resume();
+    playing = true; ON.amp = true; paint();
+    master.gain.cancelScheduledValues(ac.currentTime); master.gain.value = 0.7;
+    if (SOURCE_URL) {
+      try {
+        const audio = await ac.decodeAudioData(await (await fetch(SOURCE_URL)).arrayBuffer());
+        srcNode = ac.createBufferSource(); srcNode.buffer = audio; srcNode.loop = true; srcNode.connect(live.input); srcNode.start();
+      } catch (e) { stop(); return; }
+    }
+    nextT = ac.currentTime + 0.08; schedule(); timer = setInterval(schedule, 60);
+    playBtn.setAttribute('aria-pressed', 'true'); playBtn.querySelector('.ico').textContent = '■'; playBtn.querySelector('.lbl').textContent = 'Stop';
+    t0 = performance.now();
+  }
+  function stop() {
+    playing = false; clearInterval(timer);
+    if (ac) {
+      const t = ac.currentTime;
+      master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value, t); master.gain.linearRampToValueAtTime(0, t + 0.06);
+      sources.forEach(s => { try { s.stop(t + 0.07); } catch (e) {} }); sources.clear();
+    }
+    [srcNode, loopSrc].forEach(n => { if (n) try { n.stop(); } catch (e) {} });
+    srcNode = loopSrc = null; loopBuf = null; looper = 'off';
+    ON.amp = false; paint(); tunerNote.setAttribute('opacity', 0);
+    playBtn.setAttribute('aria-pressed', 'false'); playBtn.querySelector('.ico').textContent = '▶'; playBtn.querySelector('.lbl').textContent = 'Play a riff';
+  }
+  const playBtn = document.getElementById('play');
+  playBtn.addEventListener('click', () => playing ? stop() : start());
+
+  function toggle(o) {
+    if (o.key === 'looper') {
+      if (looper === 'off') looper = 'armed';
+      else { if (loopSrc) try { loopSrc.stop(); } catch (e) {} loopSrc = null; loopBuf = null; looper = 'off'; }
+    } else ON[o.key] = !ON[o.key];
+    paint(); if (live) setChain(live, ON, ac, true);
+    if (!playing) start();
+  }
+  lamps.forEach(o => { if (!o.g || o.key === 'wah') return;
+    o.g.addEventListener('click', () => toggle(o));
+    o.g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(o); } });
+  });
+
+  // The wah: click to switch it, or hold and drag up and down to rock it. When it's on and nobody's holding it, it rocks by itself.
+  const wahG = byKey.wah.g; wahG.style.touchAction = 'none'; wahG.style.cursor = 'ns-resize';
+  wahG.setAttribute('aria-label', 'Wah: Cry Baby. Click to switch; drag up and down, or use the arrow keys, to rock it.');
+  let drag = null;
+  const posFromEvent = e => { const r = svg.getBoundingClientRect(), y = (e.clientY - r.top) * (372 / r.height); return Math.max(0, Math.min(1, (292 - y) / 58)); };
+  wahG.addEventListener('pointerdown', e => { drag = { y: e.clientY, moved: false }; wahG.setPointerCapture(e.pointerId); });
+  wahG.addEventListener('pointermove', e => {
+    if (!drag) return;
+    if (!drag.moved && Math.abs(e.clientY - drag.y) < 4) return;
+    if (!drag.moved) { drag.moved = true; wahHeld = true; if (!ON.wah) toggle(byKey.wah); else if (!playing) start(); }
+    wahPos = posFromEvent(e);
+  });
+  const endDrag = () => { if (drag && !drag.moved) toggle(byKey.wah); drag = null; wahHeld = false; };
+  wahG.addEventListener('pointerup', endDrag); wahG.addEventListener('pointercancel', () => { drag = null; wahHeld = false; });
+  wahG.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(byKey.wah); }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); wahHeld = true; wahPos = Math.max(0, Math.min(1, wahPos + (e.key === 'ArrowUp' ? 0.1 : -0.1))); clearTimeout(wahG._t); wahG._t = setTimeout(() => wahHeld = false, 1500); }
+  });
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function wahLoop(now) {
+    if (ON.wah && playing && !wahHeld && !reduceMotion) wahPos = 0.5 + 0.5 * Math.sin(now / 1000 * Math.PI * 1.6);
+    drawWah(wahPos);
+    if (live && ON.wah) live.bp.frequency.setTargetAtTime(wahFreq(wahPos), ac.currentTime, 0.02);
+    requestAnimationFrame(wahLoop);
+  })(performance.now());
+
+  // ---- the pulse: runs along the cable while sound is playing ----
+  const dot = el('circle', { r: 4.5, fill: ACC, opacity: 0 });
+  const L = cable.getTotalLength(), RUN = 2600;
+  let t0 = performance.now();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  (function frame(now) {
+    const e = (now - t0) % (RUN + 600), k = Math.min(1, e / RUN);
+    const pt = cable.getPointAtLength(L * (1 - Math.pow(1 - k, 1.6)));
+    const inside = pt.y > 200 && lamps.find(o => pt.x >= o.x0 && pt.x <= o.x1);
+    const blocked = ON.tuner && pt.y > 200 && pt.x > byKey.tuner.x1;
+    dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
+    dot.setAttribute('opacity', playing && e < RUN && !inside && !blocked ? 1 : 0);
+    requestAnimationFrame(frame);
+  })(t0);
+})();
+
+// Hiking: prints scattered on the table. Positions are in a 1120 x 660 frame.
+(() => {
+  const box = document.getElementById('prints'); if (!box) return;
+  const P = [
+    { f: 'summit-selfie', land: 1, x: 0, y: 30, w: 370, r: -2.5, alt: 'Hamza smiling on a summit above an autumn forest' },
+    { f: 'overlook', land: 0, x: 340, y: 0, w: 230, r: 2, alt: 'Hamza on a rock looking over a bend in the river' },
+    { f: 'river-autumn', land: 1, x: 545, y: 40, w: 360, r: -1.5, alt: 'A river between autumn hills under a clear sky' },
+    { f: 'forest', land: 0, x: 880, y: 10, w: 210, r: 3, alt: 'Hamza in a sunlit autumn forest' },
+    { f: 'ledge', land: 1, x: 150, y: 330, w: 360, r: 1.5, alt: 'Hamza sitting on a ledge above a wide river' },
+    { f: 'clouds', land: 0, x: 500, y: 318, w: 220, r: -3, alt: 'Clouds over a river valley from the trail' },
+    { f: 'summit-friend', land: 0, x: 735, y: 340, w: 225, r: 2, alt: 'Hamza and a friend standing on a summit rock' }
+  ];
+  box.innerHTML = P.map(p => `<button class="print${p.land ? ' land' : ''}" style="--x:${(p.x / 11.2).toFixed(2)}%;--y:${(p.y / 6.6).toFixed(2)}%;--w:${(p.w / 11.2).toFixed(2)}%;--r:${p.r}deg" aria-label="Enlarge: ${p.alt}"><img src="assets/img/hiking/${p.f}.jpg" alt="${p.alt}" loading="lazy"></button>`).join('');
+  box.addEventListener('click', e => {
+    const b = e.target.closest('.print'); if (!b) return;
+    const img = b.querySelector('img'), lb = document.createElement('div');
+    lb.className = 'lightbox'; lb.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+    const close = () => { lb.classList.remove('open'); setTimeout(() => lb.remove(), 350); removeEventListener('keydown', esc); removeEventListener('resize', fit); b.focus(); };
+    const big = lb.querySelector('img');
+    // Every photo fills the same viewing area: as large as fits on screen, whole, never cropped.
+    const fit = () => {
+      const nw = img.naturalWidth || 4, nh = img.naturalHeight || 3;
+      const W = Math.min(1100, innerWidth - 32), H = innerHeight - 56;
+      const k = Math.min(W / nw, H / nh);
+      big.style.width = Math.round(nw * k) + 'px'; big.style.height = Math.round(nh * k) + 'px';
+    };
+    if (img.complete) fit(); else img.addEventListener('load', fit, { once: true });
+    addEventListener('resize', fit);
+    const esc = ev => { if (ev.key === 'Escape') close(); };
+    lb.addEventListener('click', close); addEventListener('keydown', esc);
+    document.body.appendChild(lb); requestAnimationFrame(() => lb.classList.add('open'));
+  });
+})();
+</script>
+
+</body>
+</html>

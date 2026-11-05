@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hamza Alshamy: teaching, mentorship, and materials for students.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23f3f3f1'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Teaching and Mentorship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: same system as the homepage. Statement first, then courses, then the materials I've built, each with a way in. */
+:root {
+  --bg: #151412;
+  --panel: #1f1d1a;
+  --line: #302d29;
+  --ink: #f3f3f1;
+  --text: #c6c2bb;
+  --muted: #8c877f;
+  --accent: #bcb2ff;
+  --font: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --ease: cubic-bezier(.22,.8,.24,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background-color: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(188,178,255,0.35); text-underline-offset: 3px; transition: text-decoration-color .25s; }
+a:hover { text-decoration-color: var(--accent); }
+a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 1120px; margin: 0 auto; }
+h1, h2, h3 { color: var(--ink); font-weight: 500; margin: 0; text-wrap: balance; }
+
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(21,20,18,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+nav.top .col { display: flex; align-items: center; gap: 24px; height: 60px; }
+nav.top .me { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; margin-right: auto; white-space: nowrap; }
+nav.top .links { display: flex; gap: 24px; font-size: 15px; }
+nav.top .links a { color: var(--muted); text-decoration: none; }
+nav.top .links a:hover, nav.top .links a.on { color: var(--ink); }
+@media (max-width: 760px) { nav.top .links { display: none; } }
+
+.intro { padding-block: clamp(32px, 4vw, 48px) clamp(28px, 3.5vw, 40px); }
+.intro .col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+@media (max-width: 880px) { .intro .col { grid-template-columns: 1fr; } }
+.left { display: grid; gap: 16px; min-width: 0; }
+.intro h1 { font-size: clamp(32px, 3.6vw, 44px); line-height: 1.05; }
+.statement { display: grid; gap: 12px; font-size: 16.5px; }
+.statement p { margin: 0; }
+.right { display: grid; min-width: 0; padding-top: 6px; }
+.right .label { margin-bottom: 8px; }
+.course { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 14px; padding: 11px 0; border-top: 1px solid var(--line); }
+.course .t { color: var(--ink); font-size: 15.5px; }
+.course .r { font-size: 14px; color: var(--muted); white-space: nowrap; text-align: right; }
+.course .s { grid-column: 1 / -1; font-size: 13.5px; color: var(--muted); }
+
+section.part { border-top: 1px solid var(--line); padding-block: clamp(28px, 3.5vw, 44px); }
+.part h2 { font-size: clamp(26px, 2.8vw, 32px); margin-bottom: 18px; }
+.made { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 40px; }
+@media (max-width: 880px) { .made { grid-template-columns: 1fr; } }
+.thing { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: start; text-decoration: none; color: inherit; }
+@media (max-width: 480px) { .thing { grid-template-columns: 1fr; } }
+.pic { background: var(--panel); border-radius: 14px; padding: 10px; aspect-ratio: 22 / 15; max-width: 100%; transition: background .3s var(--ease); }
+.pic svg { width: 100%; height: 100%; display: block; }
+.thing:hover .pic { background: #26241f; }
+.info { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.info .kind { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--text); margin: 0; }
+.info h3 { font-size: 20px; line-height: 1.2; }
+.info p { margin: 0; font-size: 15px; color: var(--text); }
+.go { justify-self: start; font-size: 14.5px; font-weight: 500; color: var(--accent); margin-top: 2px; transition: transform .3s var(--ease); }
+.thing:hover .go { transform: translateX(3px); }
+.thing:focus-visible { outline: 1px solid var(--ink); outline-offset: 6px; border-radius: 14px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 56px; }
+footer .col { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 15px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* Type: Fraunces for headings and labels, Instrument Sans for reading. */
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; font-optical-sizing: auto; }
+nav.top .me { font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; }
+.label { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: -0.005em; color: var(--ink); margin: 0 0 12px; }
+/* Social links. Icons: Font Awesome Free (CC BY 4.0, fontawesome.com/license/free); Google Scholar from Academicons (SIL OFL 1.1) */
+.socials { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.socials a { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--text); text-decoration: none; transition: color .25s var(--ease), background .25s var(--ease); }
+.socials a:hover { color: var(--ink); background: var(--panel); }
+.socials svg { width: 19px; height: 19px; fill: currentColor; display: block; }
+.nav-socials { gap: 0; padding-left: 14px; border-left: 1px solid var(--line); }
+.nav-socials a { width: 32px; height: 32px; }
+.nav-socials svg { width: 16px; height: 16px; }
+@media (max-width: 560px) { .nav-socials { display: none; } }
+.socials .cv-link { width: auto; height: 38px; padding: 0 14px; margin-left: 6px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--ink); }
+.socials .cv-link:hover { border-color: var(--text); }
+.pill { font-size: 14px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; white-space: nowrap; }
+.pill:hover { border-color: var(--muted); }
+</style>
+</head>
+<body>
+<nav class="top gutter" aria-label="Main">
+  <div class="col">
+    <a class="me" href="index.html">Hamza Alshamy</a>
+    <div class="links">
+      <a href="index.html">About</a>
+      <a class="on" aria-current="page" href="#top">Teaching</a>
+      <a href="off-the-clock.html">Off the clock</a>
+    </div>
+    <div class="socials nav-socials" aria-label="Elsewhere"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+    <a class="pill" href="assets/pdf/Hamza_Alshamy_CV.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+
+<header class="intro gutter" id="top">
+  <div class="col">
+    <div class="left">
+      <h1>Teaching and mentorship</h1>
+      <div class="statement">
+        <p>I've been fortunate to receive guidance from mentors who shaped the trajectory of my career. They made a career path in research visible where it previously wasn't, and showed me its norms and how to navigate it. That experience made me aware of the impact of setting a culture of giving as you have received. If someone can learn or benefit from my experiences, I'm always happy to chat! I'm especially sympathetic to students who want to do interdisciplinary research, as it's sometimes difficult to find a home for that.</p>
+        <p>Additionally, I'm very passionate about teaching and pedagogy!</p>
+      </div>
+    </div>
+    <aside class="right" aria-label="Courses">
+      <p class="label">Graduate Teaching Assistant, NYU</p>
+      <div class="course"><div class="t">Principles of Data Science II</div><div class="r">Spring 2025, 2026</div><div class="s">DS-UA 112 · <a href="https://as.nyu.edu/faculty/pascal-wallisch.html" target="_blank" rel="noopener">Pascal Wallisch</a></div></div>
+      <div class="course"><div class="t">Causal Inference</div><div class="r">Fall 2025</div><div class="s">DS-UA 201 · <a href="https://sidharthsah.github.io/" target="_blank" rel="noopener">Sidharth Sah</a></div></div>
+      <div class="course"><div class="t">Introduction to Data Science</div><div class="r">Fall 2025</div><div class="s">DS-GA 1001 · <a href="https://as.nyu.edu/faculty/pascal-wallisch.html" target="_blank" rel="noopener">Pascal Wallisch</a></div></div>
+      <div class="course"><div class="t">Fundamentals of Machine Learning</div><div class="r">Spring 2025</div><div class="s">CSCI-UA 473 · <a href="https://as.nyu.edu/faculty/pascal-wallisch.html" target="_blank" rel="noopener">Pascal Wallisch</a></div></div>
+    </aside>
+  </div>
+</header>
+
+<section class="part gutter" id="materials">
+  <div class="col">
+    <h2>Materials</h2>
+    <div class="made">
+      <a class="thing" href="https://github.com/hamzaalshamy/Foundations-of-Data-Science-Supplementary-Lecture-Notes" target="_blank" rel="noopener">
+        <div class="pic"><svg id="bell" viewBox="0 0 220 150" aria-hidden="true"></svg></div>
+        <div class="info">
+          <p class="kind">Lecture notes</p>
+          <h3>Foundations of Data Science: From Statistics to Machine Learning</h3>
+          <p>Twelve beginner-friendly slide decks from my recitations for Principles of Data Science II, from probability and hypothesis testing to classification and clustering.</p>
+          <span class="go">View the notes <span aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+      <a class="thing" href="https://trees-hamza.vercel.app/" target="_blank" rel="noopener">
+        <div class="pic"><svg id="tree" viewBox="0 0 220 150" aria-hidden="true"></svg></div>
+        <div class="info">
+          <p class="kind">Interactive visualizer</p>
+          <h3>Trees</h3>
+          <p>Watch decision trees, random forests, and AdaBoost learn, split by split, on a built-in dataset or your own CSV. I built it so students can see what the algorithms are doing.</p>
+          <span class="go">Open Trees <span aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="gutter">
+  <div class="col">
+    <span>Hamza Alshamy · New York</span>
+    <div class="socials"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+  </div>
+</footer>
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg', INK = '#f3f3f1', MUTED = '#8c877f', LINE = '#3a3631', ACC = '#bcb2ff', BG = '#1f1d1a';
+  const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // A decision tree that grows split by split, then holds, then starts over.
+  (() => {
+    const svg = document.getElementById('tree'); if (!svg) return;
+    const nodes = [[110, 20, 0], [60, 62, 1], [160, 62, 1], [32, 108, 2, 1], [88, 108, 2, 0], [134, 108, 2, 0], [188, 108, 2, 1]];
+    const parent = [null, 0, 0, 1, 1, 2, 2];
+    const edges = [], boxes = [];
+    nodes.forEach((n, i) => { if (parent[i] == null) return; const [px, py] = nodes[parent[i]]; edges[i] = el('path', { d: `M${px},${py + 8} C${px},${py + 26} ${n[0]},${n[1] - 26} ${n[0]},${n[1] - 8}`, stroke: LINE, 'stroke-width': 1.4, fill: 'none' }, svg); });
+    nodes.forEach(([x, y, lvl, cls], i) => {
+      const leaf = lvl === 2, w = leaf ? 34 : 46;
+      boxes[i] = el('rect', { x: x - w / 2, y: y - 8, width: w, height: 16, rx: 4, fill: leaf ? (cls ? ACC : BG) : BG, 'fill-opacity': leaf && cls ? 0.85 : 1, stroke: leaf ? (cls ? ACC : MUTED) : INK, 'stroke-width': 1.3 }, svg);
+      if (!leaf) el('line', { x1: x - 12, y1: y, x2: x + 12, y2: y, stroke: MUTED, 'stroke-width': 1, 'stroke-linecap': 'round' }, svg).classList.add('n' + i);
+    });
+    const parts = i => [boxes[i], edges[i], svg.querySelector('.n' + i)].filter(Boolean);
+    const show = (lvlMax) => nodes.forEach((n, i) => parts(i).forEach(p => { p.style.transition = 'opacity .5s'; p.style.opacity = n[2] <= lvlMax ? 1 : 0; }));
+    if (reduce) return show(2);
+    let step = 0; show(0);
+    setInterval(() => { step = (step + 1) % 5; show(Math.min(step, 2)); }, 900);
+  })();
+
+  // Dots fall into bins and pile up into a bell curve; then the curve is drawn over them.
+  (() => {
+    const svg = document.getElementById('bell'); if (!svg) return;
+    const BINS = 11, W = 220, base = 132, bw = 16, x0 = (W - BINS * bw) / 2, r = 3.2;
+    el('line', { x1: x0 - 4, y1: base + 5, x2: x0 + BINS * bw + 4, y2: base + 5, stroke: LINE, 'stroke-width': 1.4 }, svg);
+    const curve = el('path', { fill: 'none', stroke: ACC, 'stroke-width': 1.6, 'stroke-linecap': 'round' }, svg);
+    const pdf = k => Math.exp(-Math.pow((k - (BINS - 1) / 2) / 1.9, 2) / 2);
+    let pts = ''; for (let k = 0; k <= 60; k++) { const u = k / 60 * (BINS - 1); pts += `${k ? 'L' : 'M'}${x0 + bw / 2 + u * bw},${base - pdf(u) * 92}`; }
+    curve.setAttribute('d', pts); const L = curve.getTotalLength();
+    curve.style.strokeDasharray = L;
+    const g = el('g', {}, svg);
+    function binom() { let s = 0; for (let i = 0; i < BINS - 1; i++) s += Math.random() < 0.5 ? 1 : 0; return s; }
+    if (reduce) { for (let b = 0; b < BINS; b++) for (let k = 0; k < Math.round(pdf(b) * 12); k++) el('circle', { cx: x0 + bw / 2 + b * bw, cy: base - r - k * 7.4, r, fill: INK }, g); curve.style.strokeDashoffset = 0; return; }
+    let counts, n;
+    function reset() { g.innerHTML = ''; counts = new Array(BINS).fill(0); n = 0; curve.style.transition = 'none'; curve.style.strokeDashoffset = L; }
+    reset();
+    setInterval(() => {
+      if (n >= 70) { if (n === 70) { curve.style.transition = 'stroke-dashoffset 1.2s ease'; curve.style.strokeDashoffset = 0; } n++; if (n > 80) reset(); return; }
+      const b = binom(); if (counts[b] >= 12) return; const h = counts[b]++; n++;
+      const cx = x0 + bw / 2 + b * bw, cy = base - r - h * 7.4;
+      const d = el('circle', { cx, cy, r, fill: INK }, g);
+      d.animate([{ transform: `translateY(${6 - cy}px)` }, { transform: 'translateY(0px)' }], { duration: 420, easing: 'cubic-bezier(.5,0,.8,.6)' });
+    }, 70);
+  })();
+})();
+</script>
+
+
+</body>
+</html>

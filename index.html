@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hamza Alshamy: researcher in Human–AI Interaction and Computational Social Science.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23f3f3f1'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Hamza Alshamy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: black page, white type and dots, one typeface. Research leads; diagrams carry the ideas, text stays short. */
+:root {
+  --bg: #151412;
+  --panel: #1f1d1a;
+  --line: #302d29;
+  --ink: #f3f3f1;
+  --text: #c6c2bb;
+  --muted: #8c877f;
+  --accent: #bcb2ff;
+  --font: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --ease: cubic-bezier(.22,.8,.24,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+section[id], header[id] { scroll-margin-top: calc(60px + env(safe-area-inset-top, 0px)); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background-color: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(188,178,255,0.35); text-underline-offset: 3px; transition: text-decoration-color .25s; }
+a:hover { text-decoration-color: var(--accent); }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 1120px; margin: 0 auto; }
+h1, h2, h3 { color: var(--ink); font-weight: 500; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(28px, 3.2vw, 38px); line-height: 1.08; letter-spacing: -0.02em; }
+h3 { font-size: 17px; letter-spacing: -0.01em; }
+.tag { font-size: 14px; color: var(--muted); margin: 0; }
+.lede { font-size: 18px; color: var(--text); margin: 0; }
+.lede em { color: var(--ink); }
+.study p { margin: 0; }
+.study ol { margin: 6px 0 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 2px; }
+.study li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); }
+.study li::before { content: "(" counter(s) ")"; color: var(--muted); }
+
+/* Nav */
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(21,20,18,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+nav.top .col { display: flex; align-items: center; gap: 24px; height: 60px; }
+nav.top .me { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; margin-right: auto; white-space: nowrap; }
+nav.top .links { display: flex; gap: 24px; font-size: 15px; }
+nav.top .links a { color: var(--muted); text-decoration: none; }
+nav.top .links a:hover, nav.top .links a.on { color: var(--ink); }
+nav.top .links a.soon { opacity: .5; }
+@media (max-width: 820px) { nav.top .links { display: none; } }
+.pill { font-size: 14px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; white-space: nowrap; }
+.pill:hover { border-color: var(--muted); }
+
+/* Hero */
+.hero { padding-block: clamp(36px, 5vw, 64px) clamp(32px, 4vw, 52px); }
+.hero .col { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+@media (max-width: 820px) { .hero .col { grid-template-columns: 1fr; } }
+.hero-text { display: grid; gap: 22px; justify-items: start; min-width: 0; }
+h1 { font-size: clamp(44px, 6.4vw, 84px); line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+@media (max-width: 420px) { h1 { white-space: normal; } }
+.hero .lede { font-size: clamp(19px, 1.8vw, 23px); line-height: 1.45; color: var(--ink); max-width: 30ch; letter-spacing: -0.01em; }
+.side-col { display: grid; gap: 16px; justify-self: end; width: 100%; max-width: 392px; min-width: 0; }
+@media (max-width: 820px) { .side-col { justify-self: start; } }
+.roles { display: grid; gap: 2px; }
+.roles p { margin: 0; font-size: 16px; color: var(--ink); }
+.roles p span { color: var(--muted); margin: 0 4px; }
+.roles .edu { font-size: 15px; color: var(--muted); margin-top: 4px; }
+.topics { margin: -8px 0 0; font-size: 16px; color: var(--muted); }
+.bio { display: grid; gap: 12px; font-size: 17px; color: var(--text); }
+.bio p { margin: 0; }
+.facts { display: grid; gap: 6px; font-size: 15.5px; color: var(--text); margin: 4px 0 0; padding: 0; list-style: none; }
+.facts li span { color: var(--muted); }
+.photo { width: 100%; max-width: 340px; aspect-ratio: 1; object-fit: cover; border-radius: 24px; display: block; filter: grayscale(0.15); }
+@media (max-width: 820px) { .photo { justify-self: start; max-width: 300px; } }
+
+/* Sections */
+section.block { border-top: 1px solid var(--line); padding-block: clamp(36px, 4.5vw, 60px); }
+.head { display: grid; gap: 12px; margin-bottom: clamp(20px, 2.5vw, 28px); }
+
+/* Research diagram */
+.diagram { background: var(--panel); border-radius: 24px; padding: 24px 24px 18px; }
+.dg-scroll { overflow-x: auto; }
+.dg-scroll svg { display: block; width: 100%; min-width: 860px; height: auto; }
+.dg-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; margin-top: 10px; }
+.seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
+.seg button { font-size: 14px; padding: 6px 14px; border-radius: 999px; color: var(--muted); transition: background .3s var(--ease), color .3s var(--ease); }
+.seg button.on { background: var(--accent); color: var(--bg); }
+.seg button:not(.on):hover { color: var(--ink); }
+.dg-note { font-size: 14.5px; color: var(--muted); margin: 0; }
+
+.work { margin-top: clamp(28px, 3.5vw, 40px); display: grid; }
+.work-label { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: -0.005em; color: var(--ink); margin: clamp(32px, 4vw, 44px) 0 12px; }
+.work-label + .work { margin-top: 0; }
+.paper { display: grid; grid-template-columns: minmax(0, 1fr) 200px 92px; gap: 4px 32px; padding: 18px 0; border-top: 1px solid var(--line); }
+.thumb { grid-column: 3; grid-row: 1 / span 2; align-self: start; display: block; width: 92px; border-radius: 4px; overflow: hidden; background: #fff; box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 10px 24px rgba(0,0,0,0.35); transform-origin: top right; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.thumb img { display: block; width: 100%; height: auto; }
+.thumb:hover, .thumb:focus-visible { transform: scale(1.5) rotate(-1deg); box-shadow: 0 20px 44px rgba(0,0,0,0.55); z-index: 2; position: relative; }
+@media (max-width: 720px) { .paper { grid-template-columns: minmax(0, 1fr) 64px; column-gap: 18px; } .paper > div:first-child, .paper .st { grid-column: 1; } .thumb { grid-column: 2; grid-row: 1 / span 2; width: 64px; } .thumb:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .thumb { transition: none; } }
+.paper h3 { font-size: 18px; font-weight: 500; line-height: 1.35; text-wrap: wrap; }
+.paper p { margin: 4px 0 0; font-size: 15.5px; color: var(--text); }
+.paper .by { font-size: 14.5px; color: var(--muted); margin-top: 8px; }
+.paper .by b { color: var(--text); font-weight: 400; }
+.paper .st { font-size: 14.5px; color: var(--text); }
+.paper .st a { font-size: 14px; color: var(--muted); }
+
+
+/* Teaching */
+.two { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+@media (max-width: 900px) { .two { grid-template-columns: 1fr; } }
+.statement { display: grid; gap: 16px; max-width: 62ch; }
+.statement p { margin: 0; }
+.list { display: grid; }
+.list .row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 15.5px; }
+.list .row .t { color: var(--ink); }
+.list .row .s { color: var(--muted); font-size: 14.5px; }
+.list .row .r { color: var(--muted); font-size: 14.5px; white-space: nowrap; }
+.sub-h { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+.stack { display: grid; gap: 36px; }
+
+/* Diagram steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+.step { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1.5px solid var(--line); font-size: 15.5px; color: var(--muted); text-align: left; transition: color .3s var(--ease), border-color .3s var(--ease); }
+.step b { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 12.5px; font-weight: 500; flex: none; transition: all .3s var(--ease); }
+.step.on { color: var(--ink); border-top-color: var(--ink); }
+.step.on b { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+@media (max-width: 560px) { .step { font-size: 13.5px; gap: 6px; } }
+.dg-cap { margin: 12px 0 0; font-size: 17px; color: var(--ink); min-height: 1.6em; }
+
+/* Off the clock */
+.offs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .offs { grid-template-columns: 1fr; } }
+.off { background: var(--panel); border-radius: 22px; padding: 26px; display: grid; gap: 22px; text-decoration: none; color: var(--ink); transition: background .3s var(--ease); }
+.off:hover { background: #25231f; }
+.off svg { width: 96px; height: 96px; color: var(--ink); }
+.off p { margin: 6px 0 0; font-size: 15px; color: var(--muted); }
+.spin { transform-origin: 60px 60px; animation: spin 3.6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+.dg-after { margin: clamp(20px, 2.5vw, 28px) 0 0; font-size: 18px; color: var(--text); }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 56px; }
+footer .col { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 15px; color: var(--muted); }
+footer .lk { display: flex; flex-wrap: wrap; gap: 22px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* Type: Fraunces for headings and labels, Instrument Sans for reading. */
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; font-optical-sizing: auto; }
+nav.top .me { font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; }
+.label { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: -0.005em; color: var(--ink); margin: 0 0 12px; }
+/* Social links. Icons: Font Awesome Free (CC BY 4.0, fontawesome.com/license/free); Google Scholar from Academicons (SIL OFL 1.1) */
+.socials { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.socials a { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--text); text-decoration: none; transition: color .25s var(--ease), background .25s var(--ease); }
+.socials a:hover { color: var(--ink); background: var(--panel); }
+.socials svg { width: 19px; height: 19px; fill: currentColor; display: block; }
+.nav-socials { gap: 0; padding-left: 14px; border-left: 1px solid var(--line); }
+.nav-socials a { width: 32px; height: 32px; }
+.nav-socials svg { width: 16px; height: 16px; }
+@media (max-width: 560px) { .nav-socials { display: none; } }
+.socials .cv-link { width: auto; height: 38px; padding: 0 14px; margin-left: 6px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--ink); }
+.socials .cv-link:hover { border-color: var(--text); }
+</style>
+</head>
+<body>
+<nav class="top gutter" aria-label="Main">
+  <div class="col">
+    <a class="me" href="#top">Hamza Alshamy</a>
+    <div class="links">
+      <a class="on" aria-current="page" href="#top">About</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="off-the-clock.html">Off the clock</a>
+    </div>
+    <div class="socials nav-socials" aria-label="Elsewhere"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+    <a class="pill" href="assets/pdf/Hamza_Alshamy_CV.pdf" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+
+<header class="hero gutter" id="top">
+  <div class="col">
+    <div class="hero-text">
+      <h1>Hamza Alshamy</h1>
+      <p class="topics">Human–AI Interaction · Computational Social Science · Sociotechnical AI</p>
+      <div class="bio">
+        <p>I'm a researcher working on Human–AI Interaction and Computational Social Science. I study how interactions with AI change individuals, and how these changes aggregate into collective patterns.</p>
+        <p>At NYU's <a href="https://www.centerconflictcooperation.com/" target="_blank" rel="noopener">Center for Conflict and Cooperation</a> (PI: <a href="https://www.jayvanbavel.com/" target="_blank" rel="noopener">Jay Van Bavel</a>), I study Human–AI Interaction and social media dynamics, drawing on social psychology and behavioral experimentation. Previously, I was a visiting student researcher at the University of Cambridge's <a href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">Centre for Human-Inspired AI</a>, in the <a href="https://trace-lab.ai/" target="_blank" rel="noopener">Trustworthy AI Lab</a> (PI: <a href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">Umang Bhatt</a>), researching how AI assistance affects skill development among knowledge workers.</p>
+        <p>I'm also the Founding Researcher at Subconscious AI, where I lead evaluations of simulated people, testing whether they behave like real ones.</p>
+      </div>
+    </div>
+    <div class="side-col">
+      <img class="photo" alt="Hamza Alshamy" src="assets/img/prof_pic.jpg">
+        <div class="roles">
+          <p>Founding Researcher, Evaluations @ Subconscious AI</p>
+          <p>Research Assistant @ Van Bavel Lab at NYU</p>
+          <p class="edu">MS Data Science <span>·</span> BA Economics, NYU</p>
+        </div>
+    </div>
+  </div>
+</header>
+
+<section class="block gutter" id="research">
+  <div class="col">
+    <div class="head">
+      <h2>Research</h2>
+      <div class="lede study">
+        <p>Interactions with AI can shape people's beliefs, behaviors, and capabilities. I study:</p>
+        <ol>
+          <li><span>the changes these interactions produce <em>within</em> individuals, and</span></li>
+          <li><span>the collective patterns that emerge from these changes <em>across</em> individuals.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="dg-scroll">
+        <svg id="dg" viewBox="0 0 1080 480" role="img" aria-label="Five individuals, each with a position before using AI. They interact with AI, and each one's position shifts. Across people, the shifts form a pattern: converging, diverging, or clustering."></svg>
+      </div>
+      <div class="dg-foot">
+        <div class="seg" id="patterns" role="tablist" aria-label="Pattern"></div>
+      </div>
+    </div>
+
+    <p class="dg-after">I’m interested in studying these effects across different contexts, such as cognition, social behavior, and well-being. My work combines behavioral experiments, social media data, and computational methods, including NLP and machine learning.</p>
+
+    <h3 class="work-label">Select papers</h3>
+    <div class="work">
+      <div class="paper">
+        <div>
+          <h3>Artificial Intelligence Circumvents Identity-Driven Biases in Source Selection</h3>
+          <p>Across three experiments, people preferred AI over partisan human sources when seeking political information, even when they judged the sources equally competent. When politics was irrelevant, AI was preferred only over outgroup sources, suggesting its advantage depends on being seen as outside partisan identity.</p>
+          <div class="by">L. K. Globig, R. Xu, <b>H. Alshamy</b>, J. J. Van Bavel</div>
+        </div>
+        <div class="st">Under review<br><a href="https://doi.org/10.31234/osf.io/2t579_v2" target="_blank" rel="noopener">PsyArXiv</a></div>
+        <a class="thumb" href="assets/papers/globig-2025-ai-circumvents-identity-driven-biases.pdf" aria-label="Read the paper: Artificial Intelligence Circumvents Identity-Driven Biases in Source Selection" target="_blank" rel="noopener"><img src="assets/img/papers/globig-2025-ai-circumvents.jpg" alt="" loading="lazy"></a>
+      </div>
+      <div class="paper">
+        <div>
+          <h3>STaCK: Mapping and Scoring the Developmental Risk of AI Deployment Across a Career Ladder</h3>
+          <p>A framework for finding tasks where AI offers short-term productivity at the expense of long-term skill development.</p>
+          <div class="by">N. Broestl, <b>H. Alshamy</b>, U. Bhatt, A. Weller</div>
+        </div>
+        <div class="st">Under review</div>
+      </div>
+      <div class="paper">
+        <div>
+          <h3>Using Reward-Learning to Reduce the Spread and Impact of Harmful Online Content</h3>
+          <p>A behavioral intervention for social media aimed at reducing harmful content and shifting perceived social norms.</p>
+          <div class="by">L. K. Globig, <b>H. Alshamy</b>, J. J. Van Bavel</div>
+        </div>
+        <div class="st">In progress</div>
+      </div>
+      <div class="paper">
+        <div>
+          <h3>Joint Optimization for Greedy Longest-match Tokenization</h3>
+          <p>Learns tokenizer vocabularies that directly optimize compression for greedy longest-match decoding, a widely used inference rule, formulated as an integer program.</p>
+          <div class="by">A. Singh, D. Mody, G. Al Shdaifat, <b>H. Alshamy</b>, A. Wiemerslage, V. Reddy, C. W. Schmidt</div>
+        </div>
+        <div class="st">Tokenization Workshop, COLM 2026<br><a href="https://doi.org/10.48550/arXiv.2607.23362" target="_blank" rel="noopener">arXiv</a></div>
+        <a class="thumb" href="assets/papers/singh-2026-joint-optimization-greedy-tokenization.pdf" aria-label="Read the paper: Joint Optimization for Greedy Longest-match Tokenization" target="_blank" rel="noopener"><img src="assets/img/papers/singh-2026-joint-optimization.jpg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="gutter">
+  <div class="col">
+    <span>Hamza Alshamy · New York</span>
+    <div class="socials"><a href="mailto:ha2486@nyu.edu" aria-label="Email" title="Email"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></a><a href="https://github.com/hamzaalshamy" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href="https://www.linkedin.com/in/hamza-alshamy-0933631a5" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a><a href="https://x.com/AlshamyHamza" aria-label="X" title="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a><a href="https://scholar.google.com/citations?user=WqLQa-QAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M 343.75868,106.66243 V 79.430205 L 363.52365,63.999997 H 149.63354 L 20.476345,176.2736 h 85.656075 c -0.15534,2.12494 -0.21914,4.04644 -0.21914,6.22563 0,20.84472 7.2192,38.08662 21.67203,51.86089 14.45284,13.79702 32.25124,20.64784 53.32651,20.64784 4.92319,0 9.75059,-0.36794 14.43842,-1.02419 -2.90722,6.50082 -4.37457,12.52302 -4.37457,18.14228 0,9.87526 4.49924,20.4304 13.46715,31.6418 -39.23377,2.6705 -68.06112,9.73264 -86.43702,21.16322 -10.53108,6.49907 -19.000207,14.70396 -25.390349,24.5311 -6.390569,9.89933 -9.577754,20.51525 -9.577754,31.9616 0,9.64822 2.062375,18.33611 6.21907,26.06233 4.156694,7.7263 9.577757,14.07047 16.312223,18.98408 6.71825,4.96781 14.46899,9.10088 23.219,12.46874 8.73429,3.34378 17.40643,5.71858 26.06106,7.06258 8.62707,1.34222 17.20471,1.9985 25.70579,1.9985 13.46887,0 26.95353,-1.73428 40.54711,-5.18707 13.56165,-3.48461 26.28022,-8.64143 38.17105,-15.4927 11.85935,-6.80488 21.51545,-16.0865 28.9219,-27.7183 7.39024,-11.67998 11.09457,-24.80499 11.09457,-39.33613 0,-11.01584 -2.24964,-21.03852 -6.7502,-30.14073 -4.46864,-9.07202 -9.93785,-16.54102 -16.45271,-22.34403 -6.5008,-5.81263 -12.99987,-11.15539 -19.51512,-15.9679 -6.50083,-4.84488 -12.00021,-9.75058 -16.46884,-14.8129 -4.4848,-5.04657 -6.73444,-10.05419 -6.73444,-14.98395 0,-4.92145 1.73422,-9.67183 5.21588,-14.26559 3.45451,-4.6095 7.67376,-9.04795 12.60967,-13.30571 4.93756,-4.24944 9.87523,-8.96788 14.79665,-14.13302 4.92147,-5.14719 9.14072,-11.82739 12.60971,-20.00822 3.48467,-8.17907 5.20318,-17.44489 5.20318,-27.75679 0,-13.4527 -2.54714,-24.46065 -7.54735,-33.31348 -0.59369,-1.02243 -1.21757,-1.80338 -1.87511,-3.02225 l 56.90745,-46.672136 v 17.118526 c -7.39373,0.92969 -6.62422,5.34582 -6.62422,10.6352 v 128.66719 c 0,5.95832 4.8751,10.83382 10.83386,10.83382 h 3.98869 c 5.95835,0 10.83386,-4.87506 10.83386,-10.83382 V 117.29282 c 0,-5.27669 0.77741,-9.68801 -6.56167,-10.63039 z M 236.39865,329.14114 c 1.14099,0.7503 3.7039,2.78075 7.7184,6.03838 4.0495,3.24319 6.797,5.69582 8.26567,7.41432 1.43851,1.66381 3.5792,4.16501 6.37617,7.54734 2.81268,3.3744 4.7184,6.30394 5.71853,8.73425 1.00016,2.4767 2.01603,5.46089 3.04636,8.94556 0.98567,3.44488 1.48486,6.97595 1.48486,10.56169 0,17.04813 -6.56338,29.68007 -19.65604,37.85915 -13.125,8.18083 -28.76651,12.27368 -46.93767,12.27368 -9.18709,0 -18.2031,-1.09289 -27.06247,-3.1951 -8.84322,-2.11665 -17.31192,-5.3362 -25.39035,-9.60185 -8.07846,-4.25771 -14.57754,-10.20337 -19.50072,-17.79659 -4.93764,-7.64012 -7.40645,-16.41464 -7.40645,-26.24962 0,-10.32022 2.79692,-19.28987 8.42233,-26.90588 5.59343,-7.62564 12.93774,-13.3919 22.03208,-17.3154 9.0624,-3.94582 18.24946,-6.74232 27.56166,-8.39827 9.31221,-1.7023 18.79679,-2.555 28.43842,-2.555 4.46862,0 7.93582,0.25115 10.40465,0.69607 0.45456,0.21918 3.03188,2.07025 7.73456,5.56326 4.70401,3.46237 7.62565,5.59519 8.75047,6.38401 z m -3.35823,-100.5779 c -7.40648,8.85938 -17.73454,13.2882 -30.95363,13.2882 -11.85933,0 -22.29766,-4.76482 -31.26554,-14.31195 -8.99984,-9.52309 -15.42235,-20.32803 -19.34408,-32.43061 -3.93752,-12.10871 -5.90585,-23.98423 -5.90585,-35.648 0,-13.6942 3.59542,-25.35184 10.7809,-34.97598 7.18727,-9.64952 17.49915,-14.48477 30.93786,-14.48477 11.87507,0 22.37423,5.03825 31.43704,15.15677 9.09434,10.08482 15.60961,21.41303 19.5169,33.96799 3.92176,12.5392 5.87345,24.52979 5.87345,35.98399 0,13.44658 -3.70256,24.60984 -11.07663,33.45436 z"/></svg></a></div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute('href').slice(1), t = id ? document.getElementById(id) : null; if (!t) return;
+  e.preventDefault();
+  const top = t.getBoundingClientRect().top + scrollY - (id === 'top' ? 0 : 60);
+  scrollTo({ top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+const ACC = '#bcb2ff', INK = '#f3f3f1', MUTED = '#8c877f', LINE = '#3a3631', BG = '#1f1d1a';
+function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+function rng(s) { return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+/* ---------- Research diagram ---------- */
+(() => {
+  const svg = document.getElementById('dg'), seg = document.getElementById('patterns');
+  const ROWS = [1, 2, 3, 4, 5].map(n => 'Individual ' + n), ROW_OP = [1, 1, 1, 0.55, 0.25];
+  const PATTERNS = ['Converge', 'Diverge', 'Cluster'];
+  const Y = i => 114 + i * 58, AY = i => Y(i) + 22, AIx = 336, AIy = (AY(0) + AY(4)) / 2, LX0 = 0, LX1 = 196, GAP = 12, RIx = 466, TX0 = 456, TX1 = 716, CX = 935, CY = AIy, CR = 118;
+  const txt = (x, y, s, size, col, anchor = 'start', w = 400, parent = svg) => el('text', { x, y, fill: col, 'font-size': size, 'font-weight': w, 'text-anchor': anchor, 'font-family': 'Instrument Sans, Helvetica Neue, Arial, sans-serif' }, parent, s);
+  [[0, 'Individuals', 'Before using AI'], [AIx, 'Interact with AI', ''], [TX0, 'Individuals', 'After interacting with AI'], [CX - CR, 'Patterns emerge', 'Across people']].forEach(([x, a, b], i) => {
+    const anchor = i === 1 ? 'middle' : 'start';
+    txt(x, 34, a, 17, INK, anchor, 500); if (b) txt(x, 56, b, 14, MUTED, anchor);
+  });
+  const person = (cx, y, g = svg) => { el('circle', { cx, cy: y - 14, r: 5.5, fill: INK }, g); el('path', { d: `M${cx - 10} ${y + 6} a10 9.5 0 0 1 20 0 Z`, fill: INK }, g); };
+  const leftX = v => LX0 + 10 + (v + 1) / 2 * (LX1 - LX0 - 20);
+  const R = rng(11), N = 120, pop = [];
+  for (let i = 0; i < N; i++) { const a = R() * 6.283, d = Math.sqrt(R()) * 0.92; pop.push({ bx: Math.cos(a) * d, by: Math.sin(a) * d, a, d, k: Math.floor(R() * 3), u: R() }); }
+  // follow five people spread across the range, so their starting points are easy to tell apart
+  const tracked = [];
+  [-0.72, -0.36, 0.02, 0.38, 0.74].forEach(t => { let best = -1, bd = 9; pop.forEach((p, i) => { const d = Math.abs(p.bx - t) + Math.abs(p.by) * 0.3; if (!tracked.includes(i) && d < bd) { bd = d; best = i; } }); tracked.push(best); });
+  [2, 0, 4, 1, 3].map(k => tracked[k]).forEach((v, k) => tracked[k] = v);
+  // only some people use AI: they turn lavender and move; the rest stay white where they are
+  const R2 = rng(5); pop.forEach((p, i) => { p.ai = tracked.includes(i) || R2() < 0.5; });
+  const rowL = [], rowR = [];
+  const axis = (x0, x1, y, g) => {
+    el('line', { x1: x0, y1: y, x2: x1, y2: y, stroke: MUTED, 'stroke-width': 1.4, opacity: 0.85 }, g);
+    el('line', { x1: x0, y1: y - 4, x2: x0, y2: y + 4, stroke: MUTED, 'stroke-width': 1.2 }, g);
+    el('line', { x1: (x0 + x1) / 2, y1: y - 2.5, x2: (x0 + x1) / 2, y2: y + 2.5, stroke: MUTED, 'stroke-width': 1, opacity: 0.6 }, g);
+    el('line', { x1, y1: y - 4, x2: x1, y2: y + 4, stroke: MUTED, 'stroke-width': 1.2 }, g);
+  };
+  const paths = [];
+  ROWS.forEach((name, i) => {
+    const y = Y(i), ly = AY(i), dx = leftX(pop[tracked[i]].bx), gl = el('g', { opacity: ROW_OP[i] }, svg), gr = el('g', { opacity: ROW_OP[i] }, svg);
+    rowL.push(gl); rowR.push(gr);
+    // before: person and name, with their axis underneath
+    person(LX0 + 10, y, gl); txt(LX0 + 29, y + 1, name, 14.5, INK, 'start', 400, gl);
+    axis(LX0, LX1, ly, gl);
+    // visible links start after a small gap from the axis end, and stop a small gap before the next axis
+    el('path', { d: `M${LX1 + GAP} ${ly} C ${LX1 + 60} ${ly}, ${AIx - 80} ${AIy}, ${AIx - 40} ${AIy}`, stroke: LINE, 'stroke-width': 1.2, fill: 'none' }, gl);
+    el('path', { d: `M${AIx + 40} ${AIy} C ${AIx + 80} ${AIy}, ${TX0 - 60} ${ly}, ${TX0 - GAP} ${ly}`, stroke: LINE, 'stroke-width': 1.2, fill: 'none' }, gr);
+    // the pulse's route: from the dot, along the axis, across the gap, into the agent; then out to the person's new axis
+    const pin = el('path', { d: `M${dx} ${ly} H ${LX1 + GAP} C ${LX1 + 60} ${ly}, ${AIx - 80} ${AIy}, ${AIx - 40} ${AIy}`, fill: 'none', stroke: 'none' }, svg);
+    const pout = el('path', { d: `M${AIx + 40} ${AIy} C ${AIx + 80} ${AIy}, ${TX0 - 60} ${ly}, ${TX0} ${ly}`, fill: 'none', stroke: 'none' }, svg);
+    el('circle', { cx: dx, cy: ly, r: 6, fill: INK }, gl);
+    paths.push([pin, pout]);
+    // after: same person, same name, axis underneath
+    person(TX0 + 10, y, gr); txt(TX0 + 29, y + 1, name, 14.5, INK, 'start', 400, gr);
+  });
+  // the agent
+  el('line', { x1: AIx, y1: AIy - 34, x2: AIx, y2: AIy - 24, stroke: INK, 'stroke-width': 1.6 }, svg);
+  el('circle', { cx: AIx, cy: AIy - 37, r: 3.5, fill: INK }, svg);
+  el('rect', { x: AIx - 30, y: AIy - 24, width: 60, height: 46, rx: 13, fill: INK }, svg);
+  el('circle', { cx: AIx - 11, cy: AIy - 3, r: 4.5, fill: BG }, svg);
+  el('circle', { cx: AIx + 11, cy: AIy - 3, r: 4.5, fill: BG }, svg);
+  el('rect', { x: AIx - 36, y: AIy - 8, width: 4, height: 12, rx: 2, fill: INK }, svg);
+  el('rect', { x: AIx + 32, y: AIy - 8, width: 4, height: 12, rx: 2, fill: INK }, svg);
+  const tracks = ROWS.map((r, i) => {
+    const y = AY(i), g = rowR[i];
+    axis(TX0, TX1, y, g);
+    const ghost = el('circle', { cy: y, r: 6, fill: INK }, g);
+    const trail = el('line', { y1: y, y2: y, stroke: ACC, 'stroke-width': 1.5, opacity: 0.6 }, g);
+    const now = el('circle', { cy: y, r: 6, fill: ACC }, g);
+    return { ghost, trail, now };
+  });
+  // an ellipsis, then Individual N: everyone else, with no axis of their own
+  const NY = AY(4) + 58;
+  [LX0, TX0].forEach(x => {
+    [0, 1, 2].forEach(k => el('circle', { cx: x + 10, cy: AY(4) + 16 + k * 7, r: 1.8, fill: MUTED, opacity: 0.7 - k * 0.15 }, svg));
+    const g = el('g', { opacity: 0.28 }, svg); person(x + 10, NY, g); txt(x + 29, NY + 1, 'Individual N', 14.5, INK, 'start', 400, g);
+  });
+  const LG = TX0, LY2 = NY + 40;
+  el('circle', { cx: LG + 6, cy: LY2 - 5, r: 5.5, fill: INK }, svg); txt(LG + 18, LY2, 'Before AI', 13.5, MUTED);
+  el('circle', { cx: LG + 96, cy: LY2 - 5, r: 5.5, fill: ACC }, svg); txt(LG + 108, LY2, 'After AI', 13.5, MUTED);
+  el('path', { d: `M${TX1 + 18} ${AY(0)} h8 V ${AY(4)} h-8`, stroke: LINE, 'stroke-width': 1.2, fill: 'none' }, svg);
+  el('path', { d: `M${TX1 + 26} ${AIy} H ${CX - CR - 14}`, stroke: LINE, 'stroke-width': 1.2, fill: 'none' }, svg);
+  el('path', { d: `M${CX - CR - 20} ${AIy - 5} l6 5 l-6 5`, stroke: MUTED, 'stroke-width': 1.2, fill: 'none' }, svg);
+  const target = (p, mode) => {
+    if (mode === 0) return [p.bx * 0.28, p.by * 0.28];
+    if (mode === 1) { const d = 0.78 + p.u * 0.22; return [Math.cos(p.a) * d * 1.04, Math.sin(p.a) * d * 1.04]; }
+    const C = [[-0.55, -0.38], [0.58, -0.3], [0.02, 0.6]][p.k]; return [C[0] + p.bx * 0.22, C[1] + p.by * 0.22];
+  };
+  const dots = pop.map((p, i) => el('circle', { r: tracked.includes(i) ? 4.6 : 3.2, fill: INK, opacity: tracked.includes(i) ? 1 : 0.75 }, svg));
+  const pulses = ROWS.map(() => el('circle', { r: 4, fill: ACC, opacity: 0 }, svg));
+  const trackX = v => TX0 + 12 + (v + 1) / 2 * (TX1 - TX0 - 24);
+  let mode = 0, t0 = performance.now(), auto = true;
+  PATTERNS.forEach((n, i) => { const b = document.createElement('button'); b.textContent = n; b.setAttribute('role', 'tab'); b.onclick = () => { auto = false; go(i); }; seg.appendChild(b); });
+  function go(i) { mode = i; t0 = performance.now(); [...seg.children].forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i); }); }
+  const CYCLE = 6200, GLIDE = 0.09;
+  function frame(now) {
+    let e = now - t0;
+    if (auto && e > CYCLE) { go((mode + 1) % 3); e = 0; }
+    const travel = reduce ? 1 : Math.min(1, Math.max(0, (e - 900) / 1400));
+    const shift = reduce ? 1 : ease(Math.min(1, Math.max(0, (e - 2100) / 1700)));
+    pop.forEach((p, i) => {
+      const k = !p.ai ? 0 : reduce ? 1 : ease(Math.min(1, Math.max(0, (e - 2100 - p.u * 900) / 1500)));
+      const [tx, ty] = target(p, mode), x = p.bx + (tx - p.bx) * k, y = p.by + (ty - p.by) * k;
+      const gx = CX + x * CR, gy = CY + y * CR;
+      if (p.dx == null || reduce) { p.dx = gx; p.dy = gy; } else { p.dx += (gx - p.dx) * GLIDE; p.dy += (gy - p.dy) * GLIDE; }
+      dots[i].setAttribute('cx', p.dx); dots[i].setAttribute('cy', p.dy);
+      dots[i].setAttribute('fill', p.ai && (k > 0.15 || Math.hypot(gx - p.dx, gy - p.dy) > 2) ? ACC : INK);
+    });
+    tracked.forEach((pi, r) => {
+      const p = pop[pi], [tx] = target(p, mode), x0 = trackX(p.bx), x1 = trackX(p.bx + (tx - p.bx) * shift);
+      const T = tracks[r]; T.cur = T.cur == null || reduce ? x1 : T.cur + (x1 - T.cur) * GLIDE;
+      T.ghost.setAttribute('cx', x0); T.now.setAttribute('cx', T.cur);
+      T.trail.setAttribute('x1', x0); T.trail.setAttribute('x2', T.cur);
+      const [pin, pout] = paths[r], stagger = Math.min(1, Math.max(0, travel * 1.3 - r * 0.06));
+      // until this person's pulse comes back out of the agent, they are still where they started, in white
+      const arrived = reduce || stagger >= 1;
+      const back = tracks[r].cur != null && Math.abs(tracks[r].cur - trackX(pop[pi].bx)) > 1.5;
+      tracks[r].now.setAttribute('fill', arrived || back ? ACC : INK);
+      tracks[r].ghost.setAttribute('opacity', (arrived && shift > 0.02) || back ? 1 : 0);
+      tracks[r].trail.setAttribute('opacity', arrived || back ? 0.6 : 0);
+      if (stagger > 0 && stagger < 1) {
+        const path = stagger < 0.5 ? pin : pout, k = stagger < 0.5 ? stagger * 2 : (stagger - 0.5) * 2, pt = path.getPointAtLength(path.getTotalLength() * k);
+        pulses[r].setAttribute('cx', pt.x); pulses[r].setAttribute('cy', pt.y); pulses[r].setAttribute('opacity', ROW_OP[r]); pulses[r].setAttribute('fill', stagger < 0.5 ? INK : ACC);
+      } else pulses[r].setAttribute('opacity', 0);
+    });
+    requestAnimationFrame(frame);
+  }
+  go(0); requestAnimationFrame(frame);
+})();
+
+
+</script>
+
+</body>
+</html>
