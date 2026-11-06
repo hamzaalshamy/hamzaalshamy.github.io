@@ -94,6 +94,14 @@ nav.top .me { font-family: var(--display); font-weight: 400; font-size: 20px; le
 .pill { font-size: 14px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; white-space: nowrap; }
 .pill:hover { border-color: var(--muted); }
 </style>
+
+<style id="header-dots">
+nav.top .col { position: relative; }
+@view-transition { navigation: auto; }
+nav.top { view-transition-name: topnav; }
+#hdots { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 2; }
+@media (max-width: 820px) { #hdots { display: none; } }
+</style>
 </head>
 <body>
 <nav class="top gutter" aria-label="Main">
@@ -213,5 +221,89 @@ nav.top .me { font-family: var(--display); font-weight: 400; font-size: 20px; le
 </script>
 
 
+
+<script id="header-dots-js">
+(() => {
+  const nav = document.querySelector('nav.top'), col = nav && nav.querySelector('.col'), me = col && col.querySelector('.me');
+  if (!col || !me) return;
+  // the canvas spans the whole header and a band below it, so dots can travel anywhere and spill over the page a little
+  const SPILL = 0, cv = document.createElement('canvas'); cv.id = 'hdots'; cv.setAttribute('aria-hidden', 'true'); nav.appendChild(cv);
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, NH = 60, lastW = 0;
+  function size() {
+    const r = nav.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; NH = r.height; H = NH + SPILL;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); home(started && Math.abs(W - lastW) > 2); lastW = W;
+  }
+  let seed = 7; const R = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const N = 16, dots = Array.from({ length: N }, (_, i) => ({ ox: R(), oy: R(), x: 0, y: 0, vx: 0, vy: 0, hx: 0, hy: 0, ph: R() * 6.28, sp: 0.5 + R() * 0.6, m: 0.7 + R() * 0.6, ai: i % 2 === 0, t: 0 }));
+  const pos = 'middle';
+  let started = false;
+  let restored = false;
+  function home(force) {
+    const n = nav.getBoundingClientRect(), a = me.getBoundingClientRect(), links = col.querySelector('.links');
+    const b = links ? links.getBoundingClientRect() : { left: n.right - 300 };
+    const CW = 170, lo = a.right - n.left + 30, hi = b.left - n.left - 30 - CW;
+    const x0 = Math.max(lo, Math.min(hi, pos === 'left' ? lo : pos === 'right' ? hi : (lo + hi) / 2));
+    for (const p of dots) { p.hx = x0 + 8 + p.ox * (CW - 16); p.hy = 14 + p.oy * (NH - 28); if (!started) { p.x = p.hx; p.y = p.hy; } }
+    if (!started) restored = restore();
+    else if (restored && !force) { for (const p of dots) { p.hx = p.shx; p.hy = p.shy; } }
+    started = true;
+  }
+  // the cursor doesn't pull the dots along: brushing past nudges the nearby ones, then they settle back
+  let mx = null, my = null, pvx = 0, pvy = 0, lastMove = 0;
+  addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (mx !== null) { pvx = x - mx; pvy = y - my; }
+    mx = x; my = y; lastMove = performance.now();
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => { mx = null; });
+  let lastY = scrollY, kick = 0;
+  addEventListener('scroll', () => { const d = scrollY - lastY; lastY = scrollY; kick += d; }, { passive: true });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(2.5, (now - last) / 16.67); last = now; const clock = Date.now() % 1e8;
+    // scroll drags the dots along with the page, like inertia; a fast flick sends them further
+    const push = reduce ? 0 : Math.max(-30, Math.min(30, kick)); kick = 0;
+    const moving = mx !== null && now - lastMove < 120;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of dots) {
+      if (push) { p.vy += push * 0.045 / p.m; p.vx += (p.ox - 0.5) * Math.abs(push) * 0.02 / p.m; }
+      let near = false;
+      if (mx !== null) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy);
+        if (d < 34) { near = true; if (moving && !reduce) { const f = (1 - d / 34) * 0.35 / p.m; p.vx += (dx / (d || 1)) * f + pvx * 0.04 * f; p.vy += (dy / (d || 1)) * f + pvy * 0.04 * f; } } }
+      const tx = p.hx + (reduce ? 0 : Math.sin(clock / 1000 * p.sp + p.ph) * 6), ty = p.hy + (reduce ? 0 : Math.cos(clock / 1300 * p.sp + p.ph) * 4), k = 0.012;
+      p.vx += (tx - p.x) * k * dt / p.m; p.vy += (ty - p.y) * k * dt / p.m;
+      const damp = Math.pow(0.88, dt); p.vx *= damp; p.vy *= damp;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.x < 3) { p.x = 3; p.vx = Math.abs(p.vx) * 0.6; } else if (p.x > W - 3) { p.x = W - 3; p.vx = -Math.abs(p.vx) * 0.6; }
+      if (p.y < 3) { p.y = 3; p.vy = Math.abs(p.vy) * 0.6; } else if (p.y > H - 3) { p.y = H - 3; p.vy = -Math.abs(p.vy) * 0.6; }
+      p.t += ((near && p.ai ? 1 : 0) - p.t) * (near ? 0.08 : 0.02) * dt;
+      const a = 0.42 + 0.5 * p.t;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, 6.2832);
+      ctx.fillStyle = `rgba(${Math.round(243 - 55 * p.t)},${Math.round(243 - 65 * p.t)},${Math.round(241 + 14 * p.t)},${a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  // carry the dots across pages: save where they are when leaving, pick up from there on the next page
+  function restore() {
+    try {
+      const s = JSON.parse(sessionStorage.getItem('hdots') || 'null');
+      if (!s || Date.now() - s.at > 8000 || Math.abs(s.w - W) > 2 || s.d.length !== N) return false;
+      s.d.forEach((q, i) => Object.assign(dots[i], { x: q[0], y: q[1], vx: q[2], vy: q[3], t: q[4], hx: q[5], hy: q[6], shx: q[5], shy: q[6] }));
+      return true;
+    } catch (e) {}
+    return false;
+  }
+  addEventListener('pagehide', () => {
+    try { sessionStorage.setItem('hdots', JSON.stringify({ at: Date.now(), w: W, d: dots.map(p => [p.x, p.y, p.vx, p.vy, p.t, p.hx, p.hy]) })); } catch (e) {}
+  });
+  size(); addEventListener('resize', size); document.fonts && document.fonts.ready.then(home);
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
