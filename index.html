@@ -223,6 +223,25 @@ nav.top { view-transition-name: topnav; }
 #hdots { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 2; }
 @media (max-width: 820px) { #hdots { display: none; } }
 </style>
+
+<style id="dg-zoom">
+.dg-open, .dg-full { display: none; }
+@media (max-width: 820px) {
+  .diagram { position: relative; }
+  .dg-scroll { overflow: visible; }
+  .dg-scroll svg { min-width: 0; cursor: zoom-in; }
+  .dg-open { display: inline-flex; align-items: center; gap: 6px; position: absolute; top: 10px; right: 10px; z-index: 2; font: 13px "Instrument Sans", system-ui, sans-serif; color: var(--text); background: rgba(21,20,18,0.8); border: 1px solid var(--line); border-radius: 999px; padding: 6px 11px; cursor: pointer; }
+  .dg-open svg { width: 12px; height: 12px; }
+  .dg-full.open { display: block; position: fixed; inset: 0; z-index: 100; background: var(--bg); }
+  .dg-stage { position: absolute; inset: 0; overflow: hidden; touch-action: none; }
+  .dg-pan { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  .dg-pan svg { display: block; width: 100%; height: auto; min-width: 0; }
+  .dg-close { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(12px, env(safe-area-inset-right, 0px)); font: 14px "Instrument Sans", system-ui, sans-serif; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+  .dg-full .dg-foot { position: absolute; z-index: 2; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); margin: 0; justify-content: center; }
+  .dg-hint { position: absolute; z-index: 2; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); text-align: center; font: 13px "Instrument Sans", system-ui, sans-serif; color: var(--muted); pointer-events: none; transition: opacity .4s; }
+  .dg-hint.gone { opacity: 0; }
+}
+</style>
 </head>
 <body>
 <nav class="top gutter" aria-label="Main">
@@ -604,6 +623,76 @@ const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   });
   size(); addEventListener('resize', size); document.fonts && document.fonts.ready.then(home);
   requestAnimationFrame(frame);
+})();
+</script>
+
+<script id="dg-zoom-js">
+(() => {
+  const box = document.querySelector('.diagram'), home = box && box.querySelector('.dg-scroll'), svg = document.getElementById('dg'), foot = box && box.querySelector('.dg-foot');
+  if (!box || !home || !svg) return;
+  const phone = matchMedia('(max-width: 820px)');
+  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dg-open';
+  btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 2h4v4M6 14H2v-4M14 2 9.5 6.5M2 14l4.5-4.5"/></svg>Enlarge';
+  box.appendChild(btn);
+  const full = document.createElement('div'); full.className = 'dg-full'; full.setAttribute('role', 'dialog'); full.setAttribute('aria-label', 'Research diagram, enlarged');
+  full.innerHTML = '<div class="dg-stage"><div class="dg-pan"></div></div><button type="button" class="dg-close">Close</button><p class="dg-hint">Pinch to zoom · drag to move · double-tap to zoom in</p>';
+  document.body.appendChild(full);
+  const stage = full.querySelector('.dg-stage'), pan = full.querySelector('.dg-pan');
+  let s = 1, tx = 0, ty = 0, baseW = 0, baseH = 0, home0 = 0, anim = null;
+  function fit() {
+    const W = stage.clientWidth, H = stage.clientHeight, room = H - 190, k = Math.min((W - 24) / 1080, room / 480);
+    baseW = 1080 * k; baseH = 480 * k; pan.style.width = baseW + 'px';
+    s = 1; tx = (W - baseW) / 2; ty = 60 + (room - 60 - baseH) / 2 + 30; home0 = ty; apply();
+  }
+  function clamp() {
+    const W = stage.clientWidth, H = stage.clientHeight, w = baseW * s, h = baseH * s;
+    tx = w <= W ? (W - w) / 2 : Math.min(0, Math.max(W - w, tx));
+    ty = h <= H ? (s === 1 ? home0 : (H - h) / 2) : Math.min(0, Math.max(H - h, ty));
+  }
+  function apply() { clamp(); pan.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`; }
+  // double-tap glides to the new zoom instead of jumping
+  function glideTo(ns, cx, cy) {
+    cancelAnimationFrame(anim);
+    const s0 = s, tx0 = tx, ty0 = ty; ns = Math.max(1, Math.min(4, ns));
+    let txE = cx - (cx - tx) * ns / s, tyE = cy - (cy - ty) * ns / s;
+    s = ns; tx = txE; ty = tyE; clamp(); txE = tx; tyE = ty; s = s0; tx = tx0; ty = ty0;
+    const t0 = performance.now(), D = 340, ease = t => 1 - Math.pow(1 - t, 3);
+    const step = now => { const k = ease(Math.min(1, (now - t0) / D));
+      s = s0 + (ns - s0) * k; tx = tx0 + (txE - tx0) * k; ty = ty0 + (tyE - ty0) * k;
+      pan.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+      if (k < 1) anim = requestAnimationFrame(step); };
+    anim = requestAnimationFrame(step);
+  }
+  function zoomAt(ns, cx, cy) { ns = Math.max(1, Math.min(4, ns)); tx = cx - (cx - tx) * ns / s; ty = cy - (cy - ty) * ns / s; s = ns; apply(); }
+  const pts = new Map(); let last = null, lastTap = 0;
+  const hint = full.querySelector('.dg-hint');
+  stage.addEventListener('pointerdown', e => { cancelAnimationFrame(anim); hint.classList.add('gone'); stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); last = null;
+    if (pts.size === 1) { const now = Date.now(); if (now - lastTap < 300) { const r = stage.getBoundingClientRect(); glideTo(s > 1.4 ? 1 : 2.5, e.clientX - r.left, e.clientY - r.top); lastTap = 0; } else lastTap = now; } });
+  stage.addEventListener('pointermove', e => {
+    if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const r = stage.getBoundingClientRect(), a = [...pts.values()];
+    const cx = a.reduce((t, p) => t + p.x, 0) / a.length - r.left, cy = a.reduce((t, p) => t + p.y, 0) / a.length - r.top;
+    const d = a.length > 1 ? Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y) : 0;
+    if (last && last.n === a.length) { tx += cx - last.cx; ty += cy - last.cy; if (a.length > 1 && last.d) zoomAt(s * d / last.d, cx, cy); else apply(); }
+    last = { cx, cy, d, n: a.length };
+  });
+  const up = e => { pts.delete(e.pointerId); last = null; };
+  stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+  let scrollY0 = 0;
+  function open() {
+    if (!phone.matches) return;
+    pan.appendChild(svg); if (foot) full.appendChild(foot); hint.classList.remove('gone'); full.classList.add('open'); scrollY0 = scrollY;
+    document.documentElement.style.overflow = 'hidden'; fit(); dispatchEvent(new Event('resize')); full.querySelector('.dg-close').focus();
+  }
+  function close() {
+    home.appendChild(svg); if (foot) home.after(foot); full.classList.remove('open'); dispatchEvent(new Event('resize')); document.documentElement.style.overflow = ''; scrollTo(0, scrollY0); btn.focus();
+  }
+  btn.addEventListener('click', open); svg.addEventListener('click', () => { if (!full.classList.contains('open')) open(); });
+  full.querySelector('.dg-close').addEventListener('click', close);
+  addEventListener('keydown', e => { if (e.key === 'Escape' && full.classList.contains('open')) close(); });
+  let fitting = false;
+  addEventListener('resize', () => { if (full.classList.contains('open') && !fitting) { fitting = true; fit(); fitting = false; } });
+  phone.addEventListener('change', () => { if (!phone.matches && full.classList.contains('open')) close(); });
 })();
 </script>
 </body>
